@@ -34,7 +34,7 @@ export function getToken(){
 
 }
 
-export function logOut() {
+export function getUser() {
 
     const token = getToken();
     // If there's a token, return the user in the payload, otherwise return null
