@@ -4,9 +4,9 @@ import useSound from 'use-sound';
 
 export default function Track({}) {
 
-    const [trackInputs, setTrackInputs] = useState([1, 1, 1, 0, 1, 0, 1, 1]);
+    const [trackInputs, setTrackInputs] = useState([1, 0, 1, 0, 1, 0, 1, 1]);
     const [audio, setAudio] = useState(new Audio(kick1));
-    const [playSound, {stop}] = useSound(kick1, {volume: .25, interrupt: true});
+    const [playSound, {stop}] = useSound(kick1, {volume: .50, interrupt: true});
     const [trackIndex, setTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -34,6 +34,7 @@ export default function Track({}) {
     function stopPlayback() {
         stop();
         setIsPlaying(false);
+        setTrackIndex(0);
     }
 
     function startPlayback() {
