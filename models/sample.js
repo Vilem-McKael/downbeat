@@ -19,6 +19,6 @@ sampleSchema.virtual('audio').get(function() {
     return sound;
 })
 
-module.exports = mongoose.model('Project', projectSchema);
+module.exports = mongoose.model('Sample', sampleSchema);
 
 

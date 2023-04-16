@@ -12,4 +12,4 @@ const trackSchema = new Schema({
     timestamps: true,
 });
 
-module.exports = mongoose.model('Project', projectSchema);
+module.exports = trackSchema;

@@ -21,28 +21,32 @@ import WelcomePage from '../WelcomePage/WelcomePage'
 function App() {
 
   const [user, setUser] = useState(getUser());
-  const [currentProject, setCurrentProject] = useState(null);
-
-  console.log(user);
+  const [currentProject, setCurrentProject] = useState({});
 
   function updateUser(userState){
     setUser(userState);
   }
 
+  function updateCurrentProject(projectDetails) {
+    setCurrentProject(projectDetails);
+  }
+
   return (
     <main className="App">
-      {user ?
+      { user ?
       <>
-        <NavBar user={user} setUser={updateUser}/>
+        <NavBar user={user} setUser={updateUser} currentProject={currentProject}/>
         <Routes>
-          {currentProject ? 
-              <Route path='/${}' element={<ProjectPage />} />
+          {Object.keys(currentProject).length ?
+            <>
+              <Route path={`/project/${currentProject._id}`} currentProject={currentProject} element={<ProjectPage />} />
+            </>
           :
             <>
-              <Route path='/*' element={<WelcomePage />} />
             </>
           }
-          <Route path='/projects/new' element={<NewProjectPage />} />
+          <Route path='/*' element={<WelcomePage />} />
+          <Route path='/projects/new' element={<NewProjectPage currentProject={currentProject} updateCurrentProject={updateCurrentProject}/>} />
           <Route path='/projects/load' element={<LoadProjectPage />} />
 
           

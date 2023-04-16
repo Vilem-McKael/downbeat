@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import * as projectsAPI from '../../utilities/projects-api';
+import { useNavigate } from 'react-router-dom';
 
-export default function NewProjectForm( {setCurrentProject} ) {
+export default function NewProjectForm( {currentProject, setCurrentProject} ) {
     const [newProjectDetails, setNewProjectDetails] = useState({
         title: '',
         tracks: [],
@@ -12,6 +13,14 @@ export default function NewProjectForm( {setCurrentProject} ) {
 
     const [error, setError] = useState('');
 
+    const navigate = useNavigate();
+
+    useEffect(function() {
+        if (currentProject.title) {
+            navigate(`/project/${currentProject.title}`);
+        }
+    }, [currentProject]);
+
 
     function handleChange(evt) {
         setNewProjectDetails({ ...newProjectDetails, [evt.target.name]: evt.target.value });
@@ -19,10 +28,15 @@ export default function NewProjectForm( {setCurrentProject} ) {
     };
 
     async function handleSubmit(evt) {
-        evt.preventDetault();
+        evt.preventDefault();
         try {
-            const project = await projectsAPI.createProject(newProjectDetails);
-            setCurrentProject(project);
+            const projectData = {
+                title: newProjectDetails.title,
+                tracks: [],
+                bpm: 120
+            }
+            const project = await projectsAPI.createProject(projectData);
+            await setCurrentProject(project); // *** why isn't this working?
         } catch (error) {
             console.log(error);
             setError('Sorry, something went wrong.')
@@ -38,7 +52,7 @@ export default function NewProjectForm( {setCurrentProject} ) {
                 <form autoComplete="off" onSubmit={handleSubmit}>
                     <label>Project Title</label>
                     <input type="text" name="title" value={newProjectDetails.title} onChange={handleChange} required />
-                    <button type='submit'>SIGN UP</button>
+                    <button type='submit'>CREATE</button>
                 </form>
             </div>
             <p className="error-message">&nbsp;{newProjectDetails.error}</p>

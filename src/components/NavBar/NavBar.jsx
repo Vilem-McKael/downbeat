@@ -2,7 +2,7 @@ import React from 'react'
 import * as usersService from '../../utilities/users-service'
 import { Link } from 'react-router-dom';
 
-export default function NavBar( {user, updateUser} ) {
+export default function NavBar( {user, updateUser, currentProject} ) {
 
   function handleLogOut() {
     usersService.logOut()
@@ -12,6 +12,11 @@ export default function NavBar( {user, updateUser} ) {
 
   return (
     <nav>
+      {currentProject ? 
+        <Link to={`/projects/${currentProject._id}`}></Link>
+      :
+        <></>
+      }
       <Link to="/projects/new">New Project</Link>
       |
       <Link to="/projects/load">Load Project</Link>

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const track = trackSchema;
+const trackSchema = require('./track');
 
 
 const projectSchema = new Schema({
