@@ -50,7 +50,7 @@ function App() {
         </Routes>
       </>
       :
-      <AuthPage setUser={updateUser} />
+      <AuthPage updateUser={updateUser} />
       }
     </main>
   )
