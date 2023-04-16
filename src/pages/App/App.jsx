@@ -1,16 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// Libraries and methods
+import React from 'react';
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { getUser } from '../../utilities/users-service';
+
+// Style
 import './App.css'
-import Project from '../Project/Project'
+
+// Components
+import ProjectPage from '../ProjectPage/ProjectPage'
 import SignUpForm from '../../components/SignUpForm/SignUpForm'
 import LoginForm from '../../components/LoginForm/LoginForm'
-import { Routes, Route } from 'react-router-dom';
-import { getUser } from './';
+import AuthPage from '../AuthPage/AuthPage'
+import NavBar from '../../components/NavBar/NavBar';
+import LoadProjectPage from '../LoadProjectPage/LoadProjectPage';
+import NewProjectPage from '../NewProjectPage/NewProjectPage';
+import WelcomePage from '../WelcomePage/WelcomePage'
 
 
 function App() {
+
   const [user, setUser] = useState(getUser());
+  const [currentProject, setCurrentProject] = useState(null);
+
+  console.log(user);
 
   function updateUser(userState){
     setUser(userState);
@@ -22,9 +35,18 @@ function App() {
       <>
         <NavBar user={user} setUser={updateUser}/>
         <Routes>
-          <Route path='/project/:id' element={<Project />} />
-          <Route path='/projects/load' element={<LoadProjectPage />} />
+          {currentProject ? 
+              <Route path='/${}' element={<ProjectPage />} />
+          :
+            <>
+              <Route path='/*' element={<WelcomePage />} />
+            </>
+          }
           <Route path='/projects/new' element={<NewProjectPage />} />
+          <Route path='/projects/load' element={<LoadProjectPage />} />
+
+          
+          
         </Routes>
       </>
       :

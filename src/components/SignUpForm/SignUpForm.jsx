@@ -13,8 +13,14 @@ export default function SignUpForm({ setUser }) {
 
     const [error, setError] = useState('');
 
+    function handleChange(evt) {
+        setUserDetails({ ...userDetails, [evt.target.name]: evt.target.value });
+        setError('');
+    }
+
     async function handleSubmit(evt) {
         evt.preventDefault();
+        console.log(userDetails);
         try {
             const formData = {
                 name: userDetails.name,
@@ -28,12 +34,11 @@ export default function SignUpForm({ setUser }) {
         }
     }
 
-    function handleChange(evt) {
-        setUserDetails({ ...credentials, [evt.target.name]: evt.target.value });
-        setError('');
+    function isDisabled() {
+
+        userDetails.password !== userDetails.confirm;    
+
     }
-    
-    const disable = userDetails.password !== userDetails.confirm;
 
   return (
     
@@ -47,8 +52,8 @@ export default function SignUpForm({ setUser }) {
                 <label>Password</label>
                 <input type="password" name="password" value={userDetails.password} onChange={handleChange} required />
                 <label>Confirm</label>
-                <input type="password" name="password" value={userDetails.confirm} onChange={handleChange} required />
-                <button type='submit' disabled={userDetails.password !== userDetails.confirm}>SIGN UP</button>
+                <input type="password" name="confirm" value={userDetails.confirm} onChange={handleChange} required />
+                <button type='submit' disabled={isDisabled()}>SIGN UP</button>
             </form>
         </div>
         <p className="error-message">&nbsp;{userDetails.error}</p>

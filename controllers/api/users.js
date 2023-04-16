@@ -9,17 +9,22 @@ module.exports = {
 
 async function signUp(req, res) {
     try {
+        console.log(req.body)
         const user = await User.create(req.body);
-        const token = createJWET(user);
+        const token = createJWT(user);
+        console.log(token);
+        console.log(user);
         res.json(token);
+
     } catch (error) {
-        res.status(400).json(error);
+        console.log(error);
+        res.status(500).json(error);
     }
 }
 
 async function login(req, res) {
+
     try {
-        console.log(req.body);
         const user = await User.findOne({email: req.body.email});
         const passwordsMatch = await bcrypt.compare(req.body.password, user.password);
         if (passwordsMatch) {
@@ -30,8 +35,9 @@ async function login(req, res) {
         }
     } catch (error) {
         console.log(error);
-        res.status(400).json(error);
+        res.status(500).json(error);
     }
+
 }
 
 function createJWT(user) {
