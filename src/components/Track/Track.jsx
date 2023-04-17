@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import kick1 from '../../../src/assets/sounds/kick1.wav'
 import useSound from 'use-sound';
+import Tile from '../Tile/Tile';
+import './Track.css'
 
 export default function Track({}) {
 
@@ -14,12 +16,13 @@ export default function Track({}) {
         let playback = null;
         if (isPlaying) {
             playback = setInterval(() => {
+                setTrackIndex((trackIndex + 1) % 8);
                 if (isPlaying && trackInputs[trackIndex]) {
                     playSound();
                 } else {
                     stop();
                 }
-                setTrackIndex((trackIndex + 1) % 8);
+                // setTrackIndex((trackIndex + 1) % 8);
                 console.log(trackIndex);
             }, 300);
         } else {
@@ -40,6 +43,15 @@ export default function Track({}) {
         setIsPlaying(true);
     }
 
+    function updateBinaryTrackInput(idx) {
+        const updatedInputs = trackInputs;
+        console.log('before: ', updatedInputs)
+        updatedInputs[idx] = (updatedInputs[idx] + 1) % 2;
+        console.log('after: ', updatedInputs)
+        setTrackInputs(updatedInputs);
+        console.log('state: ', trackInputs);
+    }
+
     return (
         <div>
             <div>
@@ -47,8 +59,8 @@ export default function Track({}) {
                 <button onClick={stopPlayback}>Stop</button>
                 <button onClick={startPlayback}>Start</button>
             </div>
-            <div>
-                
+            <div className='track'>
+                {trackInputs.map((value, idx) => <Tile key={idx} index={idx} value={value} trackIndex={(trackIndex + 7) % 8} updateBinaryTrackInput={updateBinaryTrackInput}/>)}
             </div>
         </div>
     )

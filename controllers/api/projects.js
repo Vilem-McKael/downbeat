@@ -31,7 +31,7 @@ async function getAll(req, res) {
 async function getOne(req, res) {
     try {
         projectId = req.body.id;
-        const project = await Project.find({user: req.user._id, _id: id});
+        const project = await Project.find({user: req.user._id, _id: projectId});
         res.json(project);
     } catch (error) {
         console.log(error);

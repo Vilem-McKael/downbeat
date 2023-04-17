@@ -15,14 +15,14 @@ export default function ProjectPage() {
         id: id
       }
       const project = await projectsAPI.getProjectById(projectId);
-      setCurrentProject(project);
+      setCurrentProject(project[0]);
     }
     getOne();
   }, [])
 
   return (
     <div>
-      <h1>Project</h1>
+      <h1>{currentProject.title}</h1>
       <Track />
     </div>
   )
