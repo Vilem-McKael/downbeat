@@ -4,12 +4,11 @@ import useSound from 'use-sound';
 import Tile from '../Tile/Tile';
 import './Track.css'
 
-export default function Track({}) {
+export default function Track({track, index, isPlaying}) {
 
-    const [trackInputs, setTrackInputs] = useState([1, 1, 1, 1, 1, 0, 1, 0]);
+    const [trackInputs, setTrackInputs] = useState(track.contents);
     const [playSound, {stop}] = useSound(kick1, {volume: .25, interrupt: true});
     const [trackIndex, setTrackIndex] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(function() {
         // https://upmostly.com/tutorials/build-a-react-timer-component-using-hooks
@@ -33,16 +32,6 @@ export default function Track({}) {
         return () => clearInterval(playback);
     }, [isPlaying, trackInputs, trackIndex]);
 
-    function stopPlayback() {
-        stop();
-        setIsPlaying(false);
-        setTrackIndex(0);
-    }
-
-    function startPlayback() {
-        setIsPlaying(true);
-    }
-
     function updateBinaryTrackInput(idx) {
         const updatedInputs = trackInputs;
         console.log('before: ', updatedInputs)
@@ -55,9 +44,7 @@ export default function Track({}) {
     return (
         <div>
             <div>
-                <button onClick={playSound}>Kick</button>
-                <button onClick={stopPlayback}>Stop</button>
-                <button onClick={startPlayback}>Start</button>
+                {/* <button onClick={playSound}>Kick</button> */}
             </div>
             <div className='track'>
                 <p>{}</p>

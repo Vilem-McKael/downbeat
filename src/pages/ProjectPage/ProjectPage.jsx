@@ -9,6 +9,8 @@ export default function ProjectPage() {
 
   const [tracks, setTracks] = useState([]);
 
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const { id } = useParams();
 
   useEffect(function () {
@@ -29,10 +31,21 @@ export default function ProjectPage() {
       contents: [0, 0, 0, 0, 0, 0, 0, 0],
       // sample: '',
     }
-    const projectWithNewTrack = await projectsAPI.addTrack(id, trackDetails);
-    setCurrentProject[projectWithNewTrack];
-    setTracks[currentProject.tracks];
+    const projectWithNewTrack = await projectsAPI.addTrack(id, trackDetails)
+    .then(setCurrentProject[projectWithNewTrack])
+    .then(console.log(projectWithNewTrack));
+    // .then(setTracks[currentProject.tracks])
   }
+
+  function stopPlayback() {
+    // stop();
+    setIsPlaying(false);
+    setTrackIndex(0);
+}
+
+function startPlayback() {
+    setIsPlaying(true);
+}
 
   console.log(currentProject);
 
@@ -41,8 +54,10 @@ export default function ProjectPage() {
       <h1>{currentProject.title}</h1>
       {currentProject.title ?
         <>
+        <button onClick={stopPlayback}>Stop</button>
+        <button onClick={startPlayback}>Start</button>
         {console.log(currentProject.tracks)}
-        {currentProject.tracks.map((track, idx) => <Track track={track} key={idx} index={idx} />)}
+        {currentProject.tracks.map((track, idx) => <Track track={track} key={idx} isPlaying={isPlaying} index={idx} />)}
         </>
       :
         <>
