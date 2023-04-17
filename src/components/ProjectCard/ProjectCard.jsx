@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import * as projectsAPI from '../../utilities/projects-api';
 
-export default function ProjectCard( {project} ) {
+export default function ProjectCard( {project, deleteById} ) {
 
   const [reRender, setReRender] = useState(true)
 
@@ -10,11 +10,11 @@ export default function ProjectCard( {project} ) {
   const navigate = useNavigate();
 
   async function handleDelete() {
+    deleteById(project._id);
     const projectToDelete = {
       projectId: project._id
     }
     await projectsAPI.deleteProject(projectToDelete);
-    navigate('/projects/load')
   }
 
   return (

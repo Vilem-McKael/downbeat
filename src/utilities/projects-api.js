@@ -10,6 +10,10 @@ export function getAll() {
     return sendRequest(`${BASE_URL}/get-all`);
 }
 
+export function getProjectById(projectId) {
+    return sendRequest(`${BASE_URL}/get-one`, 'POST', projectId);
+}
+
 export function deleteProject(projectId) {
     return sendRequest(`${BASE_URL}/delete`, 'POST', projectId);
 }

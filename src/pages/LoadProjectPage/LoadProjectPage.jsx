@@ -6,6 +6,13 @@ export default function LoadProjectPage() {
 
   const [projects, setProjects] = useState([]);
 
+  async function deleteById (deletedProjectId) {
+    console.log(projects, deletedProjectId);
+    setProjects(projects.filter(project => project._id !== deletedProjectId));
+    // const refreshedProjects = await projectsAPI.getAll()
+    // setProjects(refreshedProjects);
+  }
+
   useEffect(function() {
     async function getProjects() {
       const loadedProjects = await projectsAPI.getAll();
@@ -18,7 +25,7 @@ export default function LoadProjectPage() {
 
   return (
     <>
-      {projects.map((project, idx) => <ProjectCard project={project} setProjects={setProjects} key={idx}/>)}
+      {projects.map((project, idx) => <ProjectCard project={project} deleteById={deleteById} key={idx}/>)}
     </>
   )
 }
