@@ -18,7 +18,7 @@ export default function LoadProjectPage() {
 
   return (
     <>
-      {projects.map((project, idx) => <ProjectCard project={project} key={idx}/>)}
+      {projects.map((project, idx) => <ProjectCard project={project} setProjects={setProjects} key={idx}/>)}
     </>
   )
 }

@@ -10,4 +10,6 @@ router.post('/create', projectsCtrl.createProject);
 
 router.get('/get-all', projectsCtrl.getAll);
 
+router.post('/delete', projectsCtrl.deleteOne);
+
 module.exports = router;

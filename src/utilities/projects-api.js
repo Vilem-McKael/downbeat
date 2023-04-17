@@ -9,3 +9,7 @@ export function createProject(newProjectData) {
 export function getAll() {
     return sendRequest(`${BASE_URL}/get-all`);
 }
+
+export function deleteProject(projectId) {
+    return sendRequest(`${BASE_URL}/delete`, 'POST', projectId);
+}
