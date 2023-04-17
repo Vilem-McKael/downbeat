@@ -7,7 +7,7 @@ const sampleSchema = new Schema({
 
     name: {type: String, required: true},
     category: String,
-    audio: null
+    audio: {type: Audio}
 }, {
     timestamps: true,
     toJSON: { virtuals: true }

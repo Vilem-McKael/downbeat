@@ -17,3 +17,7 @@ export function getProjectById(projectId) {
 export function deleteProject(projectId) {
     return sendRequest(`${BASE_URL}/delete`, 'POST', projectId);
 }
+
+export function addTrack(projectId, trackDetails) {
+    return sendRequest(`${BASE_URL}/${projectId}/add-track`, 'POST', trackDetails);
+}

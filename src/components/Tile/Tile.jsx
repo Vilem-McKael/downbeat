@@ -13,7 +13,7 @@ export default function Tile({index, value, updateBinaryTrackInput, trackIndex})
     }
 
     const active = index === trackIndex;
-    console.log(index, trackIndex);
+    // console.log(index, trackIndex);
 
   return (
     <>

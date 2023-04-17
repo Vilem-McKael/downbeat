@@ -60,6 +60,7 @@ export default function Track({}) {
                 <button onClick={startPlayback}>Start</button>
             </div>
             <div className='track'>
+                <p>{}</p>
                 {trackInputs.map((value, idx) => <Tile key={idx} index={idx} value={value} trackIndex={(trackIndex + 7) % 8} updateBinaryTrackInput={updateBinaryTrackInput}/>)}
             </div>
         </div>
