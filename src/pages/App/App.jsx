@@ -15,7 +15,7 @@ import AuthPage from '../AuthPage/AuthPage'
 import NavBar from '../../components/NavBar/NavBar';
 import LoadProjectPage from '../LoadProjectPage/LoadProjectPage';
 import NewProjectPage from '../NewProjectPage/NewProjectPage';
-import WelcomePage from '../WelcomePage/WelcomePage'
+import WelcomePage from '../WelcomePage/WelcomePage';
 
 
 function App() {
@@ -37,25 +37,17 @@ function App() {
       <>
         <NavBar user={user} setUser={updateUser} currentProject={currentProject}/>
         <Routes>
-          {Object.keys(currentProject).length ?
-            <>
-              <Route path={`/project/${currentProject._id}`} currentProject={currentProject} element={<ProjectPage />} />
-            </>
-          :
-            <>
-            </>
-          }
+          <Route path={`/project/:id`} currentProject={currentProject} element={<ProjectPage project={currentProject} />} />
           <Route path='/*' element={<WelcomePage />} />
           <Route path='/projects/new' element={<NewProjectPage currentProject={currentProject} updateCurrentProject={updateCurrentProject}/>} />
           <Route path='/projects/load' element={<LoadProjectPage />} />
 
-          
-          
         </Routes>
       </>
       :
       <AuthPage updateUser={updateUser} />
       }
+      {/* <ProjectPage /> */}
     </main>
   )
 }

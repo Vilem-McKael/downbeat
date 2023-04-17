@@ -4,7 +4,7 @@ const trackSchema = require('./track');
 
 
 const projectSchema = new Schema({
-
+    user: {type: Schema.Types.ObjectId, required: true},
     title: {type: String, required: true},
     tracks: [trackSchema],
     bpm: {type: Number, default: 120}

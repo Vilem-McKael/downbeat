@@ -3,7 +3,7 @@ import { useState } from 'react';
 import * as projectsAPI from '../../utilities/projects-api';
 import { useNavigate } from 'react-router-dom';
 
-export default function NewProjectForm( {currentProject, setCurrentProject} ) {
+export default function NewProjectForm( {currentProject, updateCurrentProject} ) {
     const [newProjectDetails, setNewProjectDetails] = useState({
         title: '',
         tracks: [],
@@ -35,8 +35,8 @@ export default function NewProjectForm( {currentProject, setCurrentProject} ) {
                 tracks: [],
                 bpm: 120
             }
-            const project = await projectsAPI.createProject(projectData);
-            await setCurrentProject(project); // *** why isn't this working?
+            const project = await projectsAPI.createProject(projectData)
+            .then(project => updateCurrentProject(project)); // *** why isn't this working?
         } catch (error) {
             console.log(error);
             setError('Sorry, something went wrong.')

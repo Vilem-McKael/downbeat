@@ -8,4 +8,6 @@ const projectsCtrl = require('../../controllers/api/projects');
 
 router.post('/create', projectsCtrl.createProject);
 
+router.get('/get-all', projectsCtrl.getAll);
+
 module.exports = router;

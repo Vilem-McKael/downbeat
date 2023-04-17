@@ -15,9 +15,13 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(require('./config/checkToken'));
 
-// routes
+// user routes
 app.use('/api/users', require('./routes/api/users'));
-app.use('/api/projects', require('./routes/api/projects'));
+
+// protect all routes other than users routes
+const ensureLoggedIn = require('./config/ensureLoggedIn');
+app.use('/api/projects', ensureLoggedIn, require('./routes/api/projects'));
+
 // catch all
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
