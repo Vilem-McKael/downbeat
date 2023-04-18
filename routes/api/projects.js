@@ -12,7 +12,9 @@ router.get('/get-all', projectsCtrl.getAll);
 
 router.post('/get-one', projectsCtrl.getOne);
 
-router.post('/delete', projectsCtrl.deleteOne);
+router.delete('/delete', projectsCtrl.deleteOne);
+
+router.put('/save', projectsCtrl.saveProject);
 
 // api/projects/add-track
 router.post('/:id/add-track', projectsCtrl.addTrack);

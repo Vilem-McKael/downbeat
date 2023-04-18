@@ -37,7 +37,7 @@ export default function ProjectPage() {
     // .then(setTracks[currentProject.tracks])
   }
 
-  function stopPlayback() {
+function stopPlayback() {
     // stop();
     setIsPlaying(false);
     // setTrackIndex(0);
@@ -45,6 +45,15 @@ export default function ProjectPage() {
 
 function startPlayback() {
     setIsPlaying(true);
+}
+
+async function handleSaveProject() {
+  try {
+    await projectsAPI.saveProject(currentProject)
+    .then(console.log('Successfully saved project'));
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function updateTrackContents(trackIndex, contents) {
@@ -63,6 +72,7 @@ function updateTrackContents(trackIndex, contents) {
         <>
         <button onClick={stopPlayback}>Stop</button>
         <button onClick={startPlayback}>Start</button>
+        <button onClick={handleSaveProject}>Save Project</button>
         {console.log(currentProject.tracks)}
         {currentProject.tracks.map((track, idx) => <Track track={track} key={idx} isPlaying={isPlaying} index={idx} updateTrackContents={updateTrackContents} />)}
         </>
