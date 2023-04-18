@@ -40,14 +40,21 @@ export default function ProjectPage() {
   function stopPlayback() {
     // stop();
     setIsPlaying(false);
-    setTrackIndex(0);
+    // setTrackIndex(0);
 }
 
 function startPlayback() {
     setIsPlaying(true);
 }
 
-  console.log(currentProject);
+function updateTrackContents(trackIndex, contents) {
+  const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
+  console.log('pre-update track contents: ', currentProjectCopy.tracks[trackIndex].contents);
+  currentProjectCopy.tracks[trackIndex].contents = contents;
+  console.log('post-update track contents: ', currentProjectCopy.tracks[trackIndex].contents);
+  console.log('currentProjectCopy: ', currentProjectCopy);
+  setCurrentProject(currentProjectCopy);
+}
 
   return (
     <div>
@@ -57,7 +64,7 @@ function startPlayback() {
         <button onClick={stopPlayback}>Stop</button>
         <button onClick={startPlayback}>Start</button>
         {console.log(currentProject.tracks)}
-        {currentProject.tracks.map((track, idx) => <Track track={track} key={idx} isPlaying={isPlaying} index={idx} />)}
+        {currentProject.tracks.map((track, idx) => <Track track={track} key={idx} isPlaying={isPlaying} index={idx} updateTrackContents={updateTrackContents} />)}
         </>
       :
         <>

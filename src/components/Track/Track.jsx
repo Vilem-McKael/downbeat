@@ -4,7 +4,7 @@ import useSound from 'use-sound';
 import Tile from '../Tile/Tile';
 import './Track.css'
 
-export default function Track({track, index, isPlaying}) {
+export default function Track({track, index, isPlaying, updateTrackContents, updateTrackIndex}) {
 
     const [trackInputs, setTrackInputs] = useState(track.contents);
     const [playSound, {stop}] = useSound(kick1, {volume: .25, interrupt: true});
@@ -38,6 +38,7 @@ export default function Track({track, index, isPlaying}) {
         updatedInputs[idx] = (updatedInputs[idx] + 1) % 2;
         console.log('after: ', updatedInputs)
         setTrackInputs(updatedInputs);
+        updateTrackContents(index, trackInputs);
         console.log('state: ', trackInputs);
     }
 
