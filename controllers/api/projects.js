@@ -75,11 +75,8 @@ async function saveProject(req, res) {
 async function addTrack(req, res) {
     try {
         const project = await Project.findById(req.params.id);
-        console.log(req.params.id);
-        console.log(project);
         project.tracks.push(req.body);
         const updatedProject = await project.save();
-        console.log(updatedProject);
         res.json(updatedProject);
     } catch (error) {
         console.log(error);
