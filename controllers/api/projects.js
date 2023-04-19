@@ -1,6 +1,5 @@
 const { MongoDriverError } = require('mongodb');
 const Project = require('../../models/project.js');
-const project = require('../../models/project.js');
 
 module.exports = {
     createProject,
@@ -8,7 +7,8 @@ module.exports = {
     deleteOne,
     getOne,
     addTrack,
-    saveProject
+    saveProject,
+    deleteTrack
 }
 
 // PROJECTS
@@ -78,6 +78,20 @@ async function addTrack(req, res) {
         project.tracks.push(req.body);
         const updatedProject = await project.save();
         res.json(updatedProject);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+async function deleteTrack(req, res) {
+    try {
+        const project = await Project.findById(req.params.id);
+        console.log('before: ', project.tracks);
+        project.tracks = project.tracks.filter((track) => track._id.toString() !== req.body.trackId);
+        project.save();
+        console.log('after: ', project.tracks);
+        res.status(200).json('Track successfully deleted');
     } catch (error) {
         console.log(error);
         res.status(500).json(error);

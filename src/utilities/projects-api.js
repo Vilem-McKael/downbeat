@@ -25,3 +25,7 @@ export function saveProject(project) {
 export function addTrack(projectId, trackDetails) {
     return sendRequest(`${BASE_URL}/${projectId}/add-track`, 'POST', trackDetails);
 }
+
+export function deleteTrack(projectId, trackToDelete) {
+    return sendRequest(`${BASE_URL}/${projectId}/delete-track`, 'POST', trackToDelete);
+}

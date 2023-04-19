@@ -19,4 +19,6 @@ router.put('/save', projectsCtrl.saveProject);
 // api/projects/add-track
 router.post('/:id/add-track', projectsCtrl.addTrack);
 
+router.post('/:id/delete-track', projectsCtrl.deleteTrack);
+
 module.exports = router;

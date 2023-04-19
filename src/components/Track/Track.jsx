@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import kick1 from '../../../src/assets/sounds/kick1.wav'
+import kick1 from '../../../src/assets/sounds/kicks/kick1.wav'
+// import * as soundData from '../../../soundData'
 import useSound from 'use-sound';
 import Tile from '../Tile/Tile';
 import './Track.css'
+import TrackHeader from '../TrackHeader/TrackHeader';
 
-export default function Track({track, index, isPlaying, updateTrackContents, updateTrackIndex}) {
+export default function Track({track, bpm, index, isPlaying, updateTrackContents, deleteTrack, getSample}) {
 
     const [trackInputs, setTrackInputs] = useState(track.contents);
-    const [playSound, {stop}] = useSound(kick1, {volume: .25, interrupt: true});
+    const [sample, setSample] = useState(null);
+    const [playSound, {stop}] = useSound(sample, {volume: .25, interrupt: true});
     const [trackIndex, setTrackIndex] = useState(0);
 
     useEffect(function() {
@@ -23,7 +26,8 @@ export default function Track({track, index, isPlaying, updateTrackContents, upd
                 }
                 // setTrackIndex((trackIndex + 1) % 8);
                 console.log(trackIndex);
-            }, 300);
+                console.log('bpm: ', bpm);
+            }, Math.floor(60000 / bpm));
         } else {
             clearInterval(playback);
             setTrackIndex(0);
@@ -42,13 +46,18 @@ export default function Track({track, index, isPlaying, updateTrackContents, upd
         console.log('state: ', trackInputs);
     }
 
+    function updateSample (sampleName) {
+        const newSample = getSample(sampleName);
+        setSample(newSample);
+    }
+
     return (
         <div>
             <div>
                 {/* <button onClick={playSound}>Kick</button> */}
             </div>
             <div className='track'>
-                <p>{}</p>
+                <TrackHeader track={track} deleteTrack={deleteTrack} updateSample={updateSample}/>
                 {trackInputs.map((value, idx) => <Tile key={idx} index={idx} value={value} trackIndex={(trackIndex + 7) % 8} updateBinaryTrackInput={updateBinaryTrackInput}/>)}
             </div>
         </div>
