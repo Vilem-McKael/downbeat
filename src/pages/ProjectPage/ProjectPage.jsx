@@ -54,7 +54,6 @@ import React, { useEffect, useState } from 'react'
 import Track from '../../components/Track/Track'
 import { useParams, Navigate as navigate } from 'react-router-dom';
 import * as projectsAPI from '../../utilities/projects-api';
-import NavBar from '../../components/NavBar/NavBar';
 
 export default function ProjectPage() {
 
@@ -70,12 +69,12 @@ export default function ProjectPage() {
 
   const [displayBpm, setDisplayBpm] = useState(120);
 
-  const { id } = useParams();
+  const [renderTracks, setRenderTracks] = useState(false);
 
-  
+  const { id } = useParams();  
 
   useEffect(function () {
-    async function getOne() {
+    async function renderProject() {
       const projectId = {
         id: id
       }
@@ -86,18 +85,19 @@ export default function ProjectPage() {
         setDisplayMessage(project[0].title);
         setStateBpm(project[0].bpm);
         setDisplayBpm(project[0].bpm);
+        setRenderTracks(true);
       } else {
         setCurrentProject({});
         setDisplayMessage('this project does not exist')
       }
     }
-    getOne();
+    renderProject();
   }, [])
 
   async function handleAddTrack() {
     stopPlayback();
     const trackDetails = {
-      title: 'kick1',
+      sample: 'kicks_kick1',
       contents: [0, 0, 0, 0, 0, 0, 0, 0],
       // sample: '',
     }
@@ -144,14 +144,19 @@ async function handleDeleteProject() {
 async function handleDeleteTrack(tid) {
   stopPlayback();
   try {
+    setRenderTracks(false);
+    setDisplayMessage('loading...')
     const trackToDelete = {
       trackId: tid
     }
-    console.log(trackToDelete, currentProject._id);
+    console.log('current project: ', currentProject, ' trackToDelete: ', trackToDelete);
     await projectsAPI.deleteTrack(currentProject._id, trackToDelete);
     const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
-    currentProjectCopy.tracks = currentProject.tracks.filter((track) => tid !== track._id);
+    console.log('tid: ', tid, 'track id format: ', currentProjectCopy.tracks[0]._id);
+    currentProjectCopy.tracks = currentProjectCopy.tracks.filter((track) => tid.toString() !== track._id.toString());
     setCurrentProject(currentProjectCopy);
+    setDisplayMessage(currentProjectCopy.title);
+    setRenderTracks(true);
   } catch (error) {
     console.log(error);
   }
@@ -181,7 +186,20 @@ function handleSetBpm() {
   console.log('project post BPM set: ', currentProject, ' displayBpm: ', displayBpm);
 }
 
-function getSample(category, title) {
+function getSample(category, title, trackId) {
+  setRenderTracks(false);
+  console.log('category: ', category, 'title: ', title);
+  console.log('currentProject pre update: ', currentProject)
+  const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
+  const currentTracks = currentProjectCopy.tracks;
+  // https://stackoverflow.com/questions/7176908/how-can-i-get-the-index-of-an-object-by-its-property-in-javascript
+  const thisIndex = currentTracks.map(function(track) {return track._id}).indexOf(trackId);
+  console.log('this index: ', thisIndex);
+  currentTracks[thisIndex].sample = (`${category}_${title}`);
+  currentProjectCopy.tracks = currentTracks;
+  setCurrentProject(currentProjectCopy);
+  setRenderTracks(true);
+  console.log('currentProject post update: ', currentProject);
   return sampleObj[category][title];
 }
 
@@ -198,17 +216,24 @@ function getSample(category, title) {
         <label>BPM: </label>
         <input type='number' onChange={handleChangeBPM} value={displayBpm} />
         <button onClick={handleSetBpm}>Update</button>
-        {currentProject.tracks.map((track, idx) =>
-          <Track 
-            track={track}
-            key={idx} 
-            bpm={stateBpm}
-            isPlaying={isPlaying} 
-            index={idx} 
-            updateTrackContents={updateTrackContents} 
-            deleteTrack={handleDeleteTrack}
-            getSample={getSample}
-          />)}
+        { renderTracks ?
+          <>
+            {currentProject.tracks.map((track, idx) =>
+              <Track 
+                track={track}
+                key={idx} 
+                bpm={stateBpm}
+                isPlaying={isPlaying} 
+                index={idx} 
+                updateTrackContents={updateTrackContents} 
+                deleteTrack={handleDeleteTrack}
+                getSample={getSample}
+            />)}
+          </>
+          :
+          <>
+          </>
+        }
         <button onClick={handleAddTrack}>New Track</button>
         </>
       :

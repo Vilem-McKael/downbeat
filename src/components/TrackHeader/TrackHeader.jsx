@@ -1,9 +1,10 @@
 import React from 'react'
 import './TrackHeader.css'
 
-export default function TrackHeader({track, deleteTrack, updateSample}) {
+export default function TrackHeader({track, sampleName, deleteTrack, updateSample}) {
 
   function handleDeleteTrack() {
+    console.log('trackHeader trackId: ', track._id);
     deleteTrack(track._id);
   }
 
@@ -15,8 +16,8 @@ export default function TrackHeader({track, deleteTrack, updateSample}) {
 
   return (
     <div className='trackHeader'>
-      <div>{track.title}</div>
-      <select defaultValue='selected' onChange={handleSelect}>
+      <div>{sampleName}</div>
+      <select defaultValue={`${sampleName}`} onChange={handleSelect}>
           <option value='sample'>sample:</option>
           <option value='kicks_kick1'>kick1</option>
           <option value='kicks_kick2'>kick2</option>

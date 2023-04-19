@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// const trackSchema = require('./track');
 
 const trackSchema = new Schema({
-    title: {type: String, required: true},
-    contents: [Number],
-    // sample: {type: Schema.Types.ObjectId, ref: 'Sample'},
+    sample: {type: String, required: true}, // samplecategory_samplename
+    contents: [Number]
 }, {
     timestamps: true,
 });
