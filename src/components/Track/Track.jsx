@@ -6,7 +6,7 @@ import Tile from '../Tile/Tile';
 import './Track.css'
 import TrackHeader from '../TrackHeader/TrackHeader';
 
-export default function Track({track, bpm, index, isPlaying, updateTrackContents, deleteTrack, getSample}) {
+export default function Track({track, bpm, isPlaying, index, samplePassed, updateTrackContents, deleteTrack, getSample, updateTracks}) {
 
     const [trackInputs, setTrackInputs] = useState(track.contents);
     const [sampleCategory, setSampleCategory] = useState('');
@@ -15,15 +15,18 @@ export default function Track({track, bpm, index, isPlaying, updateTrackContents
     const [trackIndex, setTrackIndex] = useState(0);
 
     const [showTrack, setShowTrack] = useState(true);
-    const [sample, setSample] = useState(null);
+    const [sample, setSample] = useState(kick1);
     const [playSound, {stop}] = useSound(sample, {volume: .25, interrupt: true});
 
+    const [updateTrack, setUpdateTrack] = useState(updateTracks);
+
     useEffect(function() {
-        // setTimeout(() => console.log('waiting for tracks to load...', 100))
+        setTimeout(() => console.log('waiting for tracks to load...', 100))
         const splitSample = track.sample.split('_');
         updateSample(splitSample[0], splitSample[1]);
-        console.log(track.sample);
-    }, [])
+        setTimeout(() => console.log('loading...'), 100);
+        console.log('samplePassed: ', samplePassed)
+    }, [sample])
 
     useEffect(function() {
         // https://upmostly.com/tutorials/build-a-react-timer-component-using-hooks

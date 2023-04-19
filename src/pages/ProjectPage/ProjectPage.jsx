@@ -1,4 +1,4 @@
-// sample imports
+// ---------- SAMPLE IMPORTS ----------
 
 import kick1 from '../../assets/sounds/kicks/kick1.wav';
 import kick2 from '../../assets/sounds/kicks/kick2.wav';
@@ -16,6 +16,8 @@ import openhat1 from '../../assets/sounds/openhats/openhat1.wav';
 import openhat2 from '../../assets/sounds/openhats/openhat2.wav';
 import tom1 from '../../assets/sounds/toms/tom1.wav';
 import tom2 from '../../assets/sounds/toms/tom2.wav';
+
+// ---------- SAMPLE OBJECT ----------
 
 const sampleObj = {
   'kicks': {
@@ -48,30 +50,50 @@ const sampleObj = {
   }
 }
 
-// React imports
+// ---------- REACT IMPORTS ----------
 
 import React, { useEffect, useState } from 'react'
 import Track from '../../components/Track/Track'
 import { useParams, Navigate as navigate } from 'react-router-dom';
 import * as projectsAPI from '../../utilities/projects-api';
 
+// ---------- PROJECT PAGE ---------- 
+
 export default function ProjectPage() {
 
+  // ---------- PARAMS ----------
+
+  const { id } = useParams(); 
+
+  // ---------- STATE VARIABLES ----------
+
+  // Stores the current project
   const [currentProject, setCurrentProject] = useState({});
 
-  // const [trackAdded, setTrackAdded] = useState(true);
-
+  // Stores the content displayed in the h1 at the top of ProjectPage
   const [displayMessage, setDisplayMessage] = useState('loading...');
 
+  // Bool that determines whether or not the project is playing
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Holds the bpm at which the track is currently playing
   const [stateBpm, setStateBpm] = useState(120);
 
+  // Holds the bpm that is displayed in the input
+  // Equal to stateBpm unless user has modified and it
+  // and not pressed 'update'
   const [displayBpm, setDisplayBpm] = useState(120);
 
+  // we'll see
+  const [passedSamples, setPassedSamples] = useState([]);
+
+  // state to control the rerendering of tracks upon state changes
   const [renderTracks, setRenderTracks] = useState(false);
 
-  const { id } = useParams();  
+  // state to control the updating of tracks
+  const [updateTracks, setUpdateTracks] = useState(false);
+
+   
 
   useEffect(function () {
     async function renderProject() {
@@ -99,21 +121,17 @@ export default function ProjectPage() {
     const trackDetails = {
       sample: 'kicks_kick1',
       contents: [0, 0, 0, 0, 0, 0, 0, 0],
-      // sample: '',
     }
     const projectWithNewTrack = await projectsAPI.addTrack(id, trackDetails)
     setCurrentProject(projectWithNewTrack);
-    // console.log(projectWithNewTrack);
-    // .then(setTracks[currentProject.tracks])
   }
 
 function stopPlayback() {
-    // stop();
     setIsPlaying(false);
-    // setTrackIndex(0);
 }
 
 function startPlayback() {
+    setUpdateTracks(!updateTracks);
     setTimeout(() => setIsPlaying(true), 1000)
 }
 
@@ -164,10 +182,7 @@ async function handleDeleteTrack(tid) {
 
 function updateTrackContents(trackIndex, contents) {
   const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
-  // console.log('pre-update track contents: ', currentProjectCopy.tracks[trackIndex].contents);
   currentProjectCopy.tracks[trackIndex].contents = contents;
-  // console.log('post-update track contents: ', currentProjectCopy.tracks[trackIndex].contents);
-  // console.log('currentProjectCopy: ', currentProjectCopy);
   setCurrentProject(currentProjectCopy);
 }
 
@@ -200,6 +215,7 @@ function getSample(category, title, trackId) {
   setCurrentProject(currentProjectCopy);
   setRenderTracks(true);
   console.log('currentProject post update: ', currentProject);
+  setUpdateTracks(!updateTracks);
   return sampleObj[category][title];
 }
 
@@ -225,9 +241,11 @@ function getSample(category, title, trackId) {
                 bpm={stateBpm}
                 isPlaying={isPlaying} 
                 index={idx} 
+                sample={passedSamples[idx]}
                 updateTrackContents={updateTrackContents} 
                 deleteTrack={handleDeleteTrack}
                 getSample={getSample}
+                updateTracks={updateTracks}
             />)}
           </>
           :
