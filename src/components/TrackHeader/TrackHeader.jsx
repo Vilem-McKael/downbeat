@@ -8,16 +8,28 @@ export default function TrackHeader({track, deleteTrack, updateSample}) {
   }
 
   function handleSelect(evt) {
-    updateSample(evt.target.value);
+    const atts = evt.target.value.split('_');
+    console.log(atts);
+    updateSample(atts[0], atts[1]);
   }
 
   return (
     <div className='trackHeader'>
       <div>{track.title}</div>
-      <select><label>Sample</label>
-          <option onClick={handleSelect}>kick1</option>
-          <option onClick={handleSelect}>kick2</option>
-          <option onClick={handleSelect}>kick3</option>
+      <select defaultValue='selected' onChange={handleSelect}>
+          <option value='sample'>sample:</option>
+          <option value='kicks_kick1'>kick1</option>
+          <option value='kicks_kick2'>kick2</option>
+          <option value='kicks_kick3'>kick3</option>
+          <option value='snares_snare1'>snare1</option>
+          <option value='snares_snare2'>snare2</option>
+          <option value='snares_snare3'>snare3</option>
+          <option value='hihats_hihat1'>hihat1</option>
+          <option value='hihats_hihat2'>hihat2</option>
+          <option value='hihats_hihat3'>hihat3</option>
+          <option value='claps_clap1'>clap1</option>
+          <option value='claps_clap2'>clap2</option>
+          <option value='claps_clap3'>clap3</option>
       </select>
       <button onClick={handleDeleteTrack}>Delete</button>
     </div>

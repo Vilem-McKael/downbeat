@@ -38,18 +38,15 @@ const sampleObj = {
     'clap2': clap2,
     'clap3': clap3
   },
-  'openhats': {
+    'openhats': {
     'openhat1': openhat1,
     'openhat2': openhat2
   },
-  'toms': {
+    'toms': {
     'tom1': tom1,
     'tom2': tom2
   }
-  
 }
-
-
 
 // React imports
 
@@ -184,8 +181,8 @@ function handleSetBpm() {
   console.log('project post BPM set: ', currentProject, ' displayBpm: ', displayBpm);
 }
 
-function getSample(title) {
-  return sampleObj[title];
+function getSample(category, title) {
+  return sampleObj[category][title];
 }
 
   return (

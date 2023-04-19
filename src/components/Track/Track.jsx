@@ -9,7 +9,7 @@ import TrackHeader from '../TrackHeader/TrackHeader';
 export default function Track({track, bpm, index, isPlaying, updateTrackContents, deleteTrack, getSample}) {
 
     const [trackInputs, setTrackInputs] = useState(track.contents);
-    const [sample, setSample] = useState(null);
+    const [sample, setSample] = useState(kick1);
     const [playSound, {stop}] = useSound(sample, {volume: .25, interrupt: true});
     const [trackIndex, setTrackIndex] = useState(0);
 
@@ -25,8 +25,8 @@ export default function Track({track, bpm, index, isPlaying, updateTrackContents
                     stop();
                 }
                 // setTrackIndex((trackIndex + 1) % 8);
-                console.log(trackIndex);
-                console.log('bpm: ', bpm);
+                // console.log(trackIndex);
+                // console.log('bpm: ', bpm);
             }, Math.floor(60000 / bpm));
         } else {
             clearInterval(playback);
@@ -34,21 +34,23 @@ export default function Track({track, bpm, index, isPlaying, updateTrackContents
         }
 
         return () => clearInterval(playback);
-    }, [isPlaying, trackInputs, trackIndex]);
+    }, [isPlaying, trackInputs, trackIndex, sample]);
 
     function updateBinaryTrackInput(idx) {
         const updatedInputs = trackInputs;
-        console.log('before: ', updatedInputs)
+        // console.log('before: ', updatedInputs)
         updatedInputs[idx] = (updatedInputs[idx] + 1) % 2;
-        console.log('after: ', updatedInputs)
+        // console.log('after: ', updatedInputs)
         setTrackInputs(updatedInputs);
         updateTrackContents(index, trackInputs);
-        console.log('state: ', trackInputs);
+        // console.log('state: ', trackInputs);
     }
 
-    function updateSample (sampleName) {
-        const newSample = getSample(sampleName);
+    async function updateSample (category, sampleName) {
+        console.log()
+        const newSample = getSample(category, sampleName);
         setSample(newSample);
+        console.log(sample);
     }
 
     return (
