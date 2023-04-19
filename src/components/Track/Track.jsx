@@ -6,27 +6,15 @@ import Tile from '../Tile/Tile';
 import './Track.css'
 import TrackHeader from '../TrackHeader/TrackHeader';
 
-export default function Track({track, bpm, isPlaying, index, samplePassed, updateTrackContents, deleteTrack, getSample, updateTracks}) {
+export default function Track({track, bpm, isPlaying, passedSample, sampleName, index, samplePassed, updateTrackContents, deleteTrack, updateSample, updateTracks}) {
 
     const [trackInputs, setTrackInputs] = useState(track.contents);
-    const [sampleCategory, setSampleCategory] = useState('');
-    const [sampleName, setSampleName] = useState('');
     
     const [trackIndex, setTrackIndex] = useState(0);
 
     const [showTrack, setShowTrack] = useState(true);
-    const [sample, setSample] = useState(kick1);
-    const [playSound, {stop}] = useSound(sample, {volume: .25, interrupt: true});
-
-    const [updateTrack, setUpdateTrack] = useState(updateTracks);
-
-    useEffect(function() {
-        setTimeout(() => console.log('waiting for tracks to load...', 100))
-        const splitSample = track.sample.split('_');
-        updateSample(splitSample[0], splitSample[1]);
-        setTimeout(() => console.log('loading...'), 100);
-        console.log('samplePassed: ', samplePassed)
-    }, [])
+    const [sample, setSample] = useState(passedSample);
+    const [playSound, {stop}] = useSound(passedSample, {volume: .25, interrupt: true});
 
     useEffect(function() {
         // https://upmostly.com/tutorials/build-a-react-timer-component-using-hooks
@@ -61,16 +49,9 @@ export default function Track({track, bpm, isPlaying, index, samplePassed, updat
         // console.log('state: ', trackInputs);
     }
 
-    async function updateSample (category, name) {
-        setShowTrack(false);
-        console.log()
-        const newSample = await getSample(category, name, track._id);
-        setSample(newSample);
-        setSampleCategory(category);
-        setSampleName(name);
-        setShowTrack(true);
+    async function changeSample (category, name) {
+        await updateSample(category, name, track._id);
         stop();
-        console.log('newSample: ', newSample, ' sample: ', sample);
     }
 
     return (
@@ -81,7 +62,7 @@ export default function Track({track, bpm, isPlaying, index, samplePassed, updat
             <div className='track'>
                 {showTrack ? 
                 <>
-                    <TrackHeader track={track} sampleName={sampleName} deleteTrack={deleteTrack} updateSample={updateSample}/>
+                    <TrackHeader track={track} sampleName={sampleName} deleteTrack={deleteTrack} changeSample={changeSample}/>
                     {trackInputs.map((value, idx) => <Tile key={idx} index={idx} value={value} trackIndex={(trackIndex + 7) % 8} updateBinaryTrackInput={updateBinaryTrackInput}/>)}
                 </>
                 :

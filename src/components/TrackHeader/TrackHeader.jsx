@@ -1,7 +1,7 @@
 import React from 'react'
 import './TrackHeader.css'
 
-export default function TrackHeader({track, sampleName, deleteTrack, updateSample}) {
+export default function TrackHeader({track, sampleName, deleteTrack, changeSample}) {
 
   function handleDeleteTrack() {
     console.log('trackHeader trackId: ', track._id);
@@ -11,7 +11,7 @@ export default function TrackHeader({track, sampleName, deleteTrack, updateSampl
   function handleSelect(evt) {
     const atts = evt.target.value.split('_');
     console.log(atts);
-    updateSample(atts[0], atts[1]);
+    changeSample(atts[0], atts[1]);
   }
 
   return (

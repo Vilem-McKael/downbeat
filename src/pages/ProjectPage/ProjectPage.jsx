@@ -86,7 +86,10 @@ export default function ProjectPage() {
   const [displayBpm, setDisplayBpm] = useState(120);
 
   // we'll see
-  const [passedSamples, setPassedSamples] = useState([]);
+  const [trackSamples, setTrackSamples] = useState([]);
+
+  //
+  const [sampleNames, setSampleNames] = useState([]);
 
   // state to control the rerendering of tracks upon state changes
   const [renderTracks, setRenderTracks] = useState(false);
@@ -108,7 +111,6 @@ export default function ProjectPage() {
         setDisplayMessage(project[0].title);
         setStateBpm(project[0].bpm);
         setDisplayBpm(project[0].bpm);
-        setRenderTracks(true);
       } else {
         setCurrentProject({});
         setDisplayMessage('this project does not exist')
@@ -116,6 +118,33 @@ export default function ProjectPage() {
     }
     renderProject();
   }, [])
+
+  useEffect(function () {
+    async function getAllTrackSamples() {
+        if (currentProject) {
+          setRenderTracks(false);
+          console.log(currentProject);
+          const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
+          console.log(currentProjectCopy.tracks);
+          const tracks = [...currentProjectCopy.tracks];
+          const retrievedSamples = [];
+          const retrievedNames = [];
+          for (let i = 0; i < tracks.length; i++) {
+            const [sampleCategory, sampleName] = tracks[i].sample.split('_');
+            const thisSample = sampleObj[sampleCategory][sampleName];
+            retrievedSamples.push(thisSample)
+            retrievedNames.push(sampleName);
+          }
+          console.log(retrievedSamples);
+          console.log(retrievedNames);
+          setTrackSamples(retrievedSamples);
+          setSampleNames(retrievedNames);
+          setRenderTracks(true);
+      }
+    }
+    getAllTrackSamples();
+    console.log(trackSamples);
+  }, [currentProject]);
 
   async function handleAddTrack() {
     stopPlayback();
@@ -202,7 +231,7 @@ function handleSetBpm() {
   console.log('project post BPM set: ', currentProject, ' displayBpm: ', displayBpm);
 }
 
-function getSample(category, title, trackId) {
+function updateSample(category, title, trackId) {
   setRenderTracks(false);
   console.log('category: ', category, 'title: ', title);
   console.log('currentProject pre update: ', currentProject)
@@ -220,6 +249,12 @@ function getSample(category, title, trackId) {
   return sampleObj[category][title];
 }
 
+
+
+/*
+async function updateTrackStateSamples
+*/
+
   return (
     <div>
       <h1>{displayMessage}</h1>
@@ -233,7 +268,7 @@ function getSample(category, title, trackId) {
         <label>BPM: </label>
         <input type='number' onChange={handleChangeBPM} value={displayBpm} />
         <button onClick={handleSetBpm}>Update</button>
-        <div class='track-container'>
+        <div className='track-container'>
         { renderTracks ?
           <>
             {currentProject.tracks.map((track, idx) =>
@@ -243,10 +278,11 @@ function getSample(category, title, trackId) {
                 bpm={stateBpm}
                 isPlaying={isPlaying} 
                 index={idx} 
-                sample={passedSamples[idx]}
+                passedSample={trackSamples[idx]}
+                sampleName={sampleNames[idx]}
                 updateTrackContents={updateTrackContents} 
                 deleteTrack={handleDeleteTrack}
-                getSample={getSample}
+                updateSample={updateSample}
                 updateTracks={updateTracks}
             />)}
           </>
