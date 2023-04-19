@@ -13,8 +13,8 @@ export default function AuthPage( { updateUser } ) {
 
   return (
     <>
-        <h1>AuthPage</h1>
-        <button onClick={handleClick}>{isNewUser ? 'Already have an account? Log in here' : 'Create a new account'}</button>
+    <div className='flex flex-col justify-center content-start bg-amber-700 mt-56 text-lg'>
+        <h1 className='text-4xl mt-4'>downbeat</h1><br/>
         { isNewUser ?
             <>
                 <SignUpForm setUser={updateUser} />
@@ -24,6 +24,8 @@ export default function AuthPage( { updateUser } ) {
                 <LoginForm setUser={updateUser} />
             </>
         }
+        <button onClick={handleClick}>{isNewUser ? 'Already have an account? Log in here' : 'New user? Create a new account'}</button><br/>
+    </div>
     </>
   )
 }

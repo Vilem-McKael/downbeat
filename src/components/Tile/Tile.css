@@ -12,7 +12,7 @@
 .indicator {
     width: 5vmin;
     height: 5vmin;
-    background-color: grey;
+    background-color: grey !important;
     border: .1vmin;
     border-style: solid;
     border-color: white;
@@ -20,7 +20,7 @@
 }
 
 .off {
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(20, 20, 20) !important;
 }
 
 .active {

@@ -26,7 +26,7 @@ export default function Track({track, bpm, isPlaying, index, samplePassed, updat
         updateSample(splitSample[0], splitSample[1]);
         setTimeout(() => console.log('loading...'), 100);
         console.log('samplePassed: ', samplePassed)
-    }, [sample])
+    }, [])
 
     useEffect(function() {
         // https://upmostly.com/tutorials/build-a-react-timer-component-using-hooks
@@ -69,6 +69,7 @@ export default function Track({track, bpm, isPlaying, index, samplePassed, updat
         setSampleCategory(category);
         setSampleName(name);
         setShowTrack(true);
+        stop();
         console.log('newSample: ', newSample, ' sample: ', sample);
     }
 

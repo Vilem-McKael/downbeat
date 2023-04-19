@@ -32,7 +32,7 @@ function App() {
     <main className="App">
       { user ?
       <>
-        <NavBar user={user} setUser={updateUser} />
+        <NavBar user={user} setUser={updateUser} /><br/>
         <Routes>
           <Route path={`/project/:id`} element={<ProjectPage />} />
           <Route path='/*' element={<WelcomePage />} />

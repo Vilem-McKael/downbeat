@@ -57,6 +57,7 @@ import Track from '../../components/Track/Track'
 import { useParams, Navigate as navigate } from 'react-router-dom';
 import * as projectsAPI from '../../utilities/projects-api';
 
+
 // ---------- PROJECT PAGE ---------- 
 
 export default function ProjectPage() {
@@ -232,6 +233,7 @@ function getSample(category, title, trackId) {
         <label>BPM: </label>
         <input type='number' onChange={handleChangeBPM} value={displayBpm} />
         <button onClick={handleSetBpm}>Update</button>
+        <div class='track-container'>
         { renderTracks ?
           <>
             {currentProject.tracks.map((track, idx) =>
@@ -252,6 +254,7 @@ function getSample(category, title, trackId) {
           <>
           </>
         }
+        </div>
         <button onClick={handleAddTrack}>New Track</button>
         </>
       :
