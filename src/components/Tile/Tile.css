@@ -1,0 +1,28 @@
+.tile {
+    display: flex;
+    width: 8vmin;
+    height: 8vmin;
+    justify-content: center;
+    align-items: center;
+    border: 1vmin;
+    border-style: solid;
+    border-color: white;
+}
+
+.indicator {
+    width: 5vmin;
+    height: 5vmin;
+    background-color: grey;
+    border: .1vmin;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50%;
+}
+
+.off {
+    background-color: rgb(20, 20, 20);
+}
+
+.active {
+    background-color: green;
+}

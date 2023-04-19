@@ -1,0 +1,12 @@
+.trackHeader {
+    display: flex;
+    font-size: 1.25vmin;
+    width: 10vw;
+    height: 8vmin;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1vmin;
+    border-style: solid;
+    border-color: white;
+}
