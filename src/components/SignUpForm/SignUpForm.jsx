@@ -20,6 +20,7 @@ export default function SignUpForm({ setUser }) {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
+        /*
         try {
             const formData = {
                 name: userDetails.name,
@@ -30,7 +31,7 @@ export default function SignUpForm({ setUser }) {
             setUser(user);
         } catch {
             setUserDetails({ ...userDetails, error: 'Sign Up Failed - Try Again'});
-        }
+        }*/
     }
 
     function isDisabled() {
