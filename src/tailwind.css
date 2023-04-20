@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Karla&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: black;
+  background-color: rgb(40, 40, 40);
+}
+
+input {
+  color: black;
+  padding-left: .5vmin;
+}
+
+button {
+  background-color: black;
+  color: ivory;
+  padding: 1vmin;
+  border: .3vmin;
+  border-radius: 10rem;
+  border-color: black;
+  border-style: solid;
+}
+
+

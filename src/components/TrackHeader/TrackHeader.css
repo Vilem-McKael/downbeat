@@ -1,0 +1,14 @@
+.trackHeader {
+    display: flex;
+    font-size: 1.5vmin !important;
+    width: 12vw;
+    height: 10vmin;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: .3vmin;
+    border-style: solid;
+    border-color: rgb(12, 6, 2);
+    background: url('../../assets/images/darkwoodtexture.jpeg');
+    background-size: cover;
+}
