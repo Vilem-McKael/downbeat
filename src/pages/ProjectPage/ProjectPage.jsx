@@ -57,7 +57,6 @@ import Track from '../../components/Track/Track'
 import ProjectControls from '../../components/ProjectControls/ProjectControls';
 import { useParams, Navigate as navigate } from 'react-router-dom';
 import * as projectsAPI from '../../utilities/projects-api';
-import { render } from 'ejs';
 import './ProjectPage.css'
 
 
