@@ -6,7 +6,15 @@
 
 :root {
   color: black;
-  background-color: rgb(40, 40, 40);
+  /* background-color: rgb(40, 40, 40); */
+  /*
+  light: 4
+  med: 1
+  dark: 3
+  */
+  background: url('../src/assets/images/concrete3.jpeg');
+  background-size: cover;
+  background-position: center;
 }
 
 input {
