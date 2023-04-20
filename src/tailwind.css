@@ -9,14 +9,11 @@
 
 input {
   color: black;
-}
-
-a {
-  color: rgb(101, 8, 8);
+  padding-left: .5vmin;
 }
 
 button {
-  background-color: black !important;
+  background-color: black;
   color: ivory;
   padding: 1vmin;
   border-radius: 10rem;

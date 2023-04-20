@@ -18,9 +18,6 @@ export default function Tile({index, value, updateBinaryTrackInput, trackIndex})
   return (
     <>
         <div className={`tile ${active ? 'active' : ''}`}>
-            {/* <div>{index} {tileVal}</div>
-            <div onClick={handleClick}>{tileVal ? 'O' : 'X'}</div>
-            -------------------- */}
             <button className={`indicator ${tileVal ? 'on' : 'off'}`} onClick={handleClick} ></button>
         </div>
     </>

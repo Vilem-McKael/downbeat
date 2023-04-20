@@ -45,9 +45,9 @@ export default function NewProjectForm( {} ) {
         <div>
             <div className='new-project-container'>
                 <form autoComplete="off" onSubmit={handleSubmit}>
-                    <label>project title: </label>&nbsp;&nbsp;
-                    <input type="text" name="title" value={newProjectDetails.title} onChange={handleChange} required /><br/><br/>
-                    <button type='submit'>create project</button>
+                    <label className='text-xl'>project title: </label><br/><br/>
+                    <input className='bg-black text-white text-xl rounded-lg pl-2 w-4/5' type="text" name="title" value={newProjectDetails.title} onChange={handleChange} required /><br/><br/><br/>
+                    <button className='text-black bg-black text-white pr-4 pl-4 text-xl' type='submit'>create project</button>
                 </form>
             </div>
             <p className="error-message">&nbsp;{newProjectDetails.error}</p>

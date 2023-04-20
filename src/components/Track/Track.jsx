@@ -6,14 +6,12 @@ import Tile from '../Tile/Tile';
 import './Track.css'
 import TrackHeader from '../TrackHeader/TrackHeader';
 
-export default function Track({track, bpm, isPlaying, passedSample, sampleName, index, samplePassed, updateTrackContents, deleteTrack, updateSample, updateTracks}) {
+export default function Track({track, index, bpm, isPlaying, passedSample, sampleName, updateTrackContents, deleteTrack, updateSample}) {
 
     const [trackInputs, setTrackInputs] = useState(track.contents);
     
     const [trackIndex, setTrackIndex] = useState(0);
 
-    const [showTrack, setShowTrack] = useState(true);
-    const [sample, setSample] = useState(passedSample);
     const [playSound, {stop}] = useSound(passedSample, {volume: .25, interrupt: true});
 
     useEffect(function() {
@@ -30,14 +28,14 @@ export default function Track({track, bpm, isPlaying, passedSample, sampleName, 
                 // setTrackIndex((trackIndex + 1) % 8);
                 // console.log(trackIndex);
                 // console.log('bpm: ', bpm);
-            }, Math.floor(60000 / bpm));
+            }, Math.floor(59000 / bpm));
         } else {
             clearInterval(playback);
             setTrackIndex(0);
         }
 
         return () => clearInterval(playback);
-    }, [isPlaying, trackInputs, trackIndex, sample]);
+    }, [isPlaying, trackInputs, trackIndex]);
 
     function updateBinaryTrackInput(idx) {
         const updatedInputs = trackInputs;
@@ -55,22 +53,9 @@ export default function Track({track, bpm, isPlaying, passedSample, sampleName, 
     }
 
     return (
-        <div>
-            <div>
-                {/* <button onClick={playSound}>Kick</button> */}
-            </div>
-            <div className='track'>
-                {showTrack ? 
-                <>
-                    <TrackHeader track={track} sampleName={sampleName} deleteTrack={deleteTrack} changeSample={changeSample}/>
-                    {trackInputs.map((value, idx) => <Tile key={idx} index={idx} value={value} trackIndex={(trackIndex + 7) % 8} updateBinaryTrackInput={updateBinaryTrackInput}/>)}
-                </>
-                :
-                <>
-                </>
-                }
-                
-            </div>
+        <div className='track'>
+            <TrackHeader track={track} sampleName={sampleName} deleteTrack={deleteTrack} changeSample={changeSample}/>
+            {trackInputs.map((value, idx) => <Tile key={idx} index={idx} value={value} trackIndex={(trackIndex + 7) % 8} updateBinaryTrackInput={updateBinaryTrackInput}/>)}
         </div>
     )
 }

@@ -1,4 +1,11 @@
 .track-container {
     display: flex;
     justify-content: center;
+    text-align: center;
+}
+
+.wood-background {
+    background: url('../../assets/images/lightwood2.jpeg');
+    background-size: cover;
+    width: 92vmin;
 }

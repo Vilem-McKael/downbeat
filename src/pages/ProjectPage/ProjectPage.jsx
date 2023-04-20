@@ -54,8 +54,11 @@ const sampleObj = {
 
 import React, { useEffect, useState } from 'react'
 import Track from '../../components/Track/Track'
+import ProjectControls from '../../components/ProjectControls/ProjectControls';
 import { useParams, Navigate as navigate } from 'react-router-dom';
 import * as projectsAPI from '../../utilities/projects-api';
+import { render } from 'ejs';
+import './ProjectPage.css'
 
 
 // ---------- PROJECT PAGE ---------- 
@@ -121,7 +124,7 @@ export default function ProjectPage() {
 
   useEffect(function () {
     async function getAllTrackSamples() {
-        if (currentProject) {
+        if (Object.keys(currentProject).length) {
           setRenderTracks(false);
           console.log(currentProject);
           const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
@@ -148,6 +151,8 @@ export default function ProjectPage() {
 
   async function handleAddTrack() {
     stopPlayback();
+    await handleSaveProject();
+    setRenderTracks(false);
     const trackDetails = {
       sample: 'kicks_kick1',
       contents: [0, 0, 0, 0, 0, 0, 0, 0],
@@ -177,6 +182,7 @@ async function handleSaveProject() {
 
 async function handleDeleteProject() {
   try {
+    stopPlayback();
     const projectToDelete = {
       projectId: currentProject._id
     }
@@ -192,6 +198,7 @@ async function handleDeleteProject() {
 async function handleDeleteTrack(tid) {
   stopPlayback();
   try {
+    stopPlayback();
     setRenderTracks(false);
     setDisplayMessage('loading...')
     const trackToDelete = {
@@ -204,7 +211,6 @@ async function handleDeleteTrack(tid) {
     currentProjectCopy.tracks = currentProjectCopy.tracks.filter((track) => tid.toString() !== track._id.toString());
     setCurrentProject(currentProjectCopy);
     setDisplayMessage(currentProjectCopy.title);
-    setRenderTracks(true);
   } catch (error) {
     console.log(error);
   }
@@ -257,41 +263,47 @@ async function updateTrackStateSamples
 
   return (
     <div>
-      <h1>{displayMessage}</h1>
+      <h1 className='text-white text-4xl mb-8'>{displayMessage}</h1>
       {Object.keys(currentProject).length ?
         <>
-        
-        <button onClick={stopPlayback}>Stop</button>
-        <button onClick={startPlayback}>Start</button>
-        <button onClick={handleSaveProject}>Save Project</button>
-        <button onClick={handleDeleteProject}>Delete Project</button>
-        <label>BPM: </label>
-        <input type='number' onChange={handleChangeBPM} value={displayBpm} />
-        <button onClick={handleSetBpm}>Update</button>
-        <div className='track-container'>
-        { renderTracks ?
-          <>
-            {currentProject.tracks.map((track, idx) =>
-              <Track 
-                track={track}
-                key={idx} 
-                bpm={stateBpm}
-                isPlaying={isPlaying} 
-                index={idx} 
-                passedSample={trackSamples[idx]}
-                sampleName={sampleNames[idx]}
-                updateTrackContents={updateTrackContents} 
-                deleteTrack={handleDeleteTrack}
-                updateSample={updateSample}
-                updateTracks={updateTracks}
-            />)}
-          </>
-          :
-          <>
-          </>
-        }
-        </div>
-        <button onClick={handleAddTrack}>New Track</button>
+          <div className='controlContainer flex flex-row contents-center justify-evenly mb-4 mt-2'>
+            <div>
+              <button className='bg-lime-900 pl-4 pr-4 mr-2' onClick={startPlayback}>start</button>
+              <button className='bg-red-900 pl-4 pr-4 mr-2' onClick={stopPlayback}>stop</button>
+              <button className='bg-amber-700 pl-4 pr-4 mr-2' onClick={handleSaveProject}>save</button>
+              <button className='bg-stone-800 pl-4 pr-4 mr-2'onClick={handleDeleteProject}>delete project</button>
+            </div>
+            <div>
+              <label className='text-white text-lg'>bpm:&nbsp;</label>
+              <input className='w-12 mr-2 bg-black text-white rounded-lg' type='number' onChange={handleChangeBPM} value={displayBpm} />
+              <button className='bg-stone-300 text-black pl-4 pr-4' onClick={handleSetBpm}>update bpm</button>
+            </div>
+          </div>
+          <div className='track-container'>
+            <div className='wood-background'>
+              { renderTracks ?
+                <>
+                  {currentProject.tracks.map((track, idx) =>
+                    <Track 
+                      key={idx} 
+                      track={track}
+                      index={idx} 
+                      bpm={stateBpm}
+                      isPlaying={isPlaying} 
+                      passedSample={trackSamples[idx]}
+                      sampleName={sampleNames[idx]}
+                      updateTrackContents={updateTrackContents} 
+                      deleteTrack={handleDeleteTrack}
+                      updateSample={updateSample}
+                  />)}
+                </>
+                :
+                <>
+                </>
+              }
+          </div>
+          </div>
+          <button className='bg-amber-700 pl-4 pr-4 mt-4' onClick={handleAddTrack}>new track (save)</button>
         </>
       :
         <>
