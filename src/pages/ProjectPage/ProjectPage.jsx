@@ -54,8 +54,7 @@ const sampleObj = {
 
 import React, { useEffect, useState } from 'react'
 import Track from '../../components/Track/Track'
-import ProjectControls from '../../components/ProjectControls/ProjectControls';
-import { useParams, Navigate as navigate } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import * as projectsAPI from '../../utilities/projects-api';
 import './ProjectPage.css'
 
