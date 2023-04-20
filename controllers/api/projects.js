@@ -74,7 +74,6 @@ async function saveProject(req, res) {
 
 async function addTrack(req, res) {
     try {
-        console.log(req.body);
         const project = await Project.findById(req.params.id);
         project.tracks.push(req.body);
         const updatedProject = await project.save();
@@ -88,10 +87,8 @@ async function addTrack(req, res) {
 async function deleteTrack(req, res) {
     try {
         const project = await Project.findById(req.params.id);
-        console.log('before: ', project.tracks);
         project.tracks = project.tracks.filter((track) => track._id.toString() !== req.body.trackId);
         project.save();
-        console.log('after: ', project.tracks);
         res.status(200).json('Track successfully deleted');
     } catch (error) {
         console.log(error);

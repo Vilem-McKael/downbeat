@@ -4,20 +4,18 @@ import './TrackHeader.css'
 export default function TrackHeader({track, sampleName, deleteTrack, changeSample}) {
 
   function handleDeleteTrack() {
-    console.log('trackHeader trackId: ', track._id);
     deleteTrack(track._id);
   }
 
   function handleSelect(evt) {
     const atts = evt.target.value.split('_');
-    console.log(atts);
     changeSample(atts[0], atts[1]);
   }
 
   return (
     <div className='trackHeader'>
-      <div className='mb-1 text-sm'>{sampleName}</div>
-      <select className='text-black mb-2 text-sm bg-black text-white' defaultValue={`${sampleName}`} onChange={handleSelect}>
+      <div className='mb-1 mt-1'>{sampleName}</div>
+      <select className='text-black mb-2 bg-black text-white' defaultValue={`${sampleName}`} onChange={handleSelect}>
           <option value='sample'>sample:</option>
           <option value='kicks_kick1'>kick1</option>
           <option value='kicks_kick2'>kick2</option>
@@ -32,9 +30,7 @@ export default function TrackHeader({track, sampleName, deleteTrack, changeSampl
           <option value='claps_clap2'>clap2</option>
           <option value='claps_clap3'>clap3</option>
       </select>
-      <button className='pt-1 pb-1 text-xs' onClick={handleDeleteTrack}>Delete</button>
+      <button className='pb-0 pt-0 mb-1' onClick={handleDeleteTrack}>Delete</button>
     </div>
-    // This component should contain the name of the current sound and a delete option.
-    // Eventually, the user should be able to change the sound directly from here
   )
 }

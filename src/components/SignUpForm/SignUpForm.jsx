@@ -20,7 +20,6 @@ export default function SignUpForm({ setUser }) {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
-        console.log(userDetails);
         try {
             const formData = {
                 name: userDetails.name,

@@ -108,7 +108,6 @@ export default function ProjectPage() {
         id: id
       }
       const project = await projectsAPI.getProjectById(projectId);
-      console.log('retrieved project: ', project);
       if (project.length) {
         setCurrentProject(project[0]);
         setDisplayMessage(project[0].title);
@@ -126,9 +125,7 @@ export default function ProjectPage() {
     async function getAllTrackSamples() {
         if (Object.keys(currentProject).length) {
           setRenderTracks(false);
-          console.log(currentProject);
           const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
-          console.log(currentProjectCopy.tracks);
           const tracks = [...currentProjectCopy.tracks];
           const retrievedSamples = [];
           const retrievedNames = [];
@@ -138,15 +135,12 @@ export default function ProjectPage() {
             retrievedSamples.push(thisSample)
             retrievedNames.push(sampleName);
           }
-          console.log(retrievedSamples);
-          console.log(retrievedNames);
           setTrackSamples(retrievedSamples);
           setSampleNames(retrievedNames);
           setRenderTracks(true);
       }
     }
     getAllTrackSamples();
-    console.log(trackSamples);
   }, [currentProject]);
 
   async function handleAddTrack() {
@@ -174,7 +168,6 @@ async function handleSaveProject() {
   stopPlayback();
   try {
     await projectsAPI.saveProject(currentProject)
-    .then(console.log('Successfully saved project'));
   } catch (error) {
     console.log(error);
   }
@@ -204,10 +197,8 @@ async function handleDeleteTrack(tid) {
     const trackToDelete = {
       trackId: tid
     }
-    console.log('current project: ', currentProject, ' trackToDelete: ', trackToDelete);
     await projectsAPI.deleteTrack(currentProject._id, trackToDelete);
     const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
-    console.log('tid: ', tid, 'track id format: ', currentProjectCopy.tracks[0]._id);
     currentProjectCopy.tracks = currentProjectCopy.tracks.filter((track) => tid.toString() !== track._id.toString());
     setCurrentProject(currentProjectCopy);
     setDisplayMessage(currentProjectCopy.title);
@@ -233,33 +224,21 @@ function handleSetBpm() {
   currentProjectCopy.bpm = parseInt(displayBpm);
   setStateBpm(displayBpm);
   setCurrentProject(currentProjectCopy);
-  // setCurrentProject({...currentProject, bpm: displayBpm}); // ({...currentProject, bpm})
-  console.log('project post BPM set: ', currentProject, ' displayBpm: ', displayBpm);
 }
 
 function updateSample(category, title, trackId) {
   setRenderTracks(false);
-  console.log('category: ', category, 'title: ', title);
-  console.log('currentProject pre update: ', currentProject)
   const currentProjectCopy = JSON.parse(JSON.stringify(currentProject));
   const currentTracks = currentProjectCopy.tracks;
   // https://stackoverflow.com/questions/7176908/how-can-i-get-the-index-of-an-object-by-its-property-in-javascript
   const thisIndex = currentTracks.map(function(track) {return track._id}).indexOf(trackId);
-  console.log('this index: ', thisIndex);
   currentTracks[thisIndex].sample = (`${category}_${title}`);
   currentProjectCopy.tracks = currentTracks;
   setCurrentProject(currentProjectCopy);
   setRenderTracks(true);
-  console.log('currentProject post update: ', currentProject);
   setUpdateTracks(!updateTracks);
   return sampleObj[category][title];
 }
-
-
-
-/*
-async function updateTrackStateSamples
-*/
 
   return (
     <div>

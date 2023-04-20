@@ -25,9 +25,6 @@ export default function Track({track, index, bpm, isPlaying, passedSample, sampl
                 } else {
                     stop();
                 }
-                // setTrackIndex((trackIndex + 1) % 8);
-                // console.log(trackIndex);
-                // console.log('bpm: ', bpm);
             }, Math.floor(59000 / bpm));
         } else {
             clearInterval(playback);
@@ -39,12 +36,9 @@ export default function Track({track, index, bpm, isPlaying, passedSample, sampl
 
     function updateBinaryTrackInput(idx) {
         const updatedInputs = trackInputs;
-        // console.log('before: ', updatedInputs)
         updatedInputs[idx] = (updatedInputs[idx] + 1) % 2;
-        // console.log('after: ', updatedInputs)
         setTrackInputs(updatedInputs);
         updateTrackContents(index, trackInputs);
-        // console.log('state: ', trackInputs);
     }
 
     async function changeSample (category, name) {

@@ -9,11 +9,8 @@ module.exports = {
 
 async function signUp(req, res) {
     try {
-        console.log(req.body)
         const user = await User.create(req.body);
         const token = createJWT(user);
-        console.log(token);
-        console.log(user);
         res.json(token);
 
     } catch (error) {

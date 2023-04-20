@@ -1,6 +1,6 @@
 .trackHeader {
     display: flex;
-    font-size: 1.25vmin;
+    font-size: 1.5vmin !important;
     width: 12vw;
     height: 10vmin;
     flex-direction: column;
