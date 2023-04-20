@@ -4,7 +4,7 @@
 
 :root {
   color: black;
-  background-color: black;
+  background-color: rgb(40, 40, 40);
 }
 
 input {
@@ -16,7 +16,10 @@ button {
   background-color: black;
   color: ivory;
   padding: 1vmin;
+  border: .3vmin;
   border-radius: 10rem;
+  border-color: black;
+  border-style: solid;
 }
 
 

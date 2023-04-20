@@ -271,7 +271,7 @@ async function updateTrackStateSamples
               <button className='bg-lime-900 pl-4 pr-4 mr-2' onClick={startPlayback}>start</button>
               <button className='bg-red-900 pl-4 pr-4 mr-2' onClick={stopPlayback}>stop</button>
               <button className='bg-amber-700 pl-4 pr-4 mr-2' onClick={handleSaveProject}>save</button>
-              <button className='bg-stone-800 pl-4 pr-4 mr-2'onClick={handleDeleteProject}>delete project</button>
+              <button className='bg-black pl-4 pr-4 mr-2'onClick={handleDeleteProject}>delete project</button>
             </div>
             <div>
               <label className='text-white text-lg'>bpm:&nbsp;</label>
