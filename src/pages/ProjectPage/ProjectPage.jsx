@@ -174,17 +174,19 @@ async function handleSaveProject() {
 }
 
 async function handleDeleteProject() {
-  try {
-    stopPlayback();
-    const projectToDelete = {
-      projectId: currentProject._id
+  if (confirm('you sure you wanna delete this fire beat?')) {
+    try {
+      stopPlayback();
+      const projectToDelete = {
+        projectId: currentProject._id
+      }
+      const deletedTitle = currentProject.title;
+      await projectsAPI.deleteProject(projectToDelete)
+      setCurrentProject({});
+      setDisplayMessage(`${deletedTitle} has been deleted`)
+    } catch (error) {
+      console.log(error);
     }
-    const deletedTitle = currentProject.title;
-    await projectsAPI.deleteProject(projectToDelete)
-    setCurrentProject({});
-    setDisplayMessage(`${deletedTitle} has been deleted`)
-  } catch (error) {
-    console.log(error);
   }
 }
 
@@ -243,7 +245,7 @@ function updateSample(category, title, trackId) {
   return (
     <div>
       <div className='flex items-center justify-center'>
-        <h1 className='text-white text-4xl mb-8'>{displayMessage}</h1>
+        <h1 className='text-white text-[5vmin] mb-[2vmin] ml-[12vmin] mr-[12vmin] text-center'>{displayMessage}</h1>
       </div>
       {Object.keys(currentProject).length ?
         <>
