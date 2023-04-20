@@ -242,7 +242,9 @@ function updateSample(category, title, trackId) {
 
   return (
     <div>
-      <h1 className='text-white text-4xl mb-8'>{displayMessage}</h1>
+      <div className='flex items-center justify-center'>
+        <h1 className='text-white text-4xl mb-8'>{displayMessage}</h1>
+      </div>
       {Object.keys(currentProject).length ?
         <>
           <div className='controlContainer flex flex-row contents-center justify-evenly mb-4 mt-2'>
@@ -282,7 +284,9 @@ function updateSample(category, title, trackId) {
               }
           </div>
           </div>
-          <button className='bg-amber-700 pl-4 pr-4 mt-4' onClick={handleAddTrack}>new track (save)</button>
+          <div className='flex items-center justify-center'>
+            <button className='bg-amber-700 pl-4 pr-4 mt-4 mb-4' onClick={handleAddTrack}>new track (save)</button>
+          </div>
         </>
       :
         <>

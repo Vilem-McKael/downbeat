@@ -12,8 +12,8 @@
 .indicator {
     width: 5vmin;
     height: 5vmin;
-    background-color: rgb(190, 84, 4) !important;
-    border: .05vmin;
+    background-color: rgb(216, 101, 18) !important;
+    border: .2vmin;
     border-style: solid;
     border-color: black;
     border-radius: 50%;
@@ -21,7 +21,7 @@
 
 .off {
     background-color: rgb(20, 20, 20) !important;
-    border-color: white;
+    border-color: tan;
 }
 
 .active {

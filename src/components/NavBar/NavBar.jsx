@@ -1,6 +1,7 @@
 import React from 'react'
 import * as usersService from '../../utilities/users-service'
 import { Link } from 'react-router-dom';
+import './NavBar.css'
 
 export default function NavBar( {user, updateUser} ) {
 
@@ -11,12 +12,14 @@ export default function NavBar( {user, updateUser} ) {
 
 
   return (
-    <nav className='flex bg-amber-700 text-xl justify-evenly m-4 mt-0 h-10 pt-1'>
-      <Link to="/projects/new">create new</Link>
-      |
-      <Link to="/projects/load">load saved</Link>
-      |
-      <Link to='' onClick={handleLogOut}>log out</Link>
+    <nav className='navbar flex bg-amber-700 items-center justify-evenly text-xl h-20 pt-1'>
+        <Link to='/'><img className='w-24' src='https://i.imgur.com/5jtUS3f.png' /></Link>
+        |
+        <Link to="/projects/new">create new</Link>
+        |
+        <Link to="/projects/load">load saved</Link>
+        |
+        <Link to='' onClick={handleLogOut}>log out</Link>
     </nav>
   )
 }

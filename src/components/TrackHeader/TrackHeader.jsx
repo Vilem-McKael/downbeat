@@ -15,7 +15,7 @@ export default function TrackHeader({track, sampleName, deleteTrack, changeSampl
   return (
     <div className='trackHeader'>
       <div className='mb-1 mt-1'>{sampleName}</div>
-      <select className='text-black mb-2 bg-black text-white' defaultValue={`${sampleName}`} onChange={handleSelect}>
+      <select className='text-black mb-2 bg-black text-white p-[.2vmin]' defaultValue={`${sampleName}`} onChange={handleSelect}>
           <option value='sample'>sample:</option>
           <option value='kicks_kick1'>kick1</option>
           <option value='kicks_kick2'>kick2</option>

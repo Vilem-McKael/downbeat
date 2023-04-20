@@ -29,7 +29,7 @@ function App() {
   
 
   return (
-    <main className="App">
+    <main className="App font-cabin">
       { user ?
       <>
         <NavBar user={user} setUser={updateUser} /><br/>
