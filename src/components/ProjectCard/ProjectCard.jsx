@@ -22,10 +22,10 @@ export default function ProjectCard( {project, deleteById} ) {
         <Link to={`/project/${project._id}`}>
           <div>
           <h1 className='text-4xl'>{project.title}</h1><br/>
-          <p>{date.toLocaleDateString('en-US')}</p><br/>
+          <p>{date.toLocaleString('en-US')}</p><br/>
           </div>
         </Link>
-        <button classname='delete-button' onClick={handleDelete}>delete project</button>
+        <button className='delete-button' onClick={handleDelete}>delete project</button>
       </div>
       </div>
     </>
