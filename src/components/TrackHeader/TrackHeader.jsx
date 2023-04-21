@@ -29,6 +29,10 @@ export default function TrackHeader({track, sampleName, deleteTrack, changeSampl
           <option value='claps_clap1'>clap1</option>
           <option value='claps_clap2'>clap2</option>
           <option value='claps_clap3'>clap3</option>
+          <option value='openhats_openhat1'>openhat1</option>
+          <option value='openhats_openhat2'>openhat2</option>
+          <option value='toms_tom1'>tom1</option>
+          <option value='toms_tom2'>tom2</option>
       </select>
       <button className='pb-0 pt-0 mb-[.5vmin]' onClick={handleDeleteTrack}>Delete</button>
     </div>
