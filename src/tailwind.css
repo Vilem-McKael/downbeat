@@ -12,13 +12,23 @@
   med: 1
   dark: 3
   */
-  background: url('../src/assets/images/concrete3.jpeg');
+  background: url('../src/assets/images/cement.jpeg');
   background-size: cover;
   background-position: center;
 }
 
+a, .link {
+  transform: scale(1);
+}
+
+a:hover, .link:hover{
+  transform: scale(1.2);
+  transition: transform 100ms ease-in;
+}
+
 input {
-  color: black;
+  color: ivory;
+  background-color: black;
   padding-left: .5vmin;
 }
 
@@ -30,6 +40,10 @@ button {
   border-radius: 10rem;
   border-color: black;
   border-style: solid;
+  transform: scale(1)
 }
 
-
+button:hover {
+  transform: scale(1.05);
+  transition: transform 75ms ease-in;
+}

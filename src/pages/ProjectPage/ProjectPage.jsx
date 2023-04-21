@@ -143,14 +143,18 @@ export default function ProjectPage() {
 
   async function handleAddTrack() {
     stopPlayback();
-    await handleSaveProject();
-    setRenderTracks(false);
-    const trackDetails = {
-      sample: 'kicks_kick1',
-      contents: [0, 0, 0, 0, 0, 0, 0, 0],
+    if (currentProject.tracks.length < 10) {
+      await handleSaveProject();
+      setRenderTracks(false);
+      const trackDetails = {
+        sample: 'snares_snare1',
+        contents: [0, 0, 0, 0, 0, 0, 0, 0],
+      }
+      const projectWithNewTrack = await projectsAPI.addTrack(id, trackDetails)
+      setCurrentProject(projectWithNewTrack);
+    } else {
+      alert('you have reached the track limit for this project.')
     }
-    const projectWithNewTrack = await projectsAPI.addTrack(id, trackDetails)
-    setCurrentProject(projectWithNewTrack);
   }
 
 function stopPlayback() {
@@ -243,7 +247,7 @@ function updateSample(category, title, trackId) {
   return (
     <div>
       <div className='flex items-center justify-center'>
-        <h1 className='text-white text-[5vmin] mb-[2vmin] ml-[12vmin] mr-[12vmin] text-center'>{displayMessage}</h1>
+        <h1 className='text-[ivory] bg-black pl-4 pr-4 rounded-[1vmin] text-[5vmin] mb-[2vmin] ml-[12vmin] mr-[12vmin] text-center'>{displayMessage}</h1>
       </div>
       {Object.keys(currentProject).length ?
         <>
@@ -255,14 +259,15 @@ function updateSample(category, title, trackId) {
               <button className='bg-black pl-4 pr-4 mr-2'onClick={handleDeleteProject}>delete project</button>
             </div>
             <div>
-              <label className='text-white text-lg'>bpm:&nbsp;</label>
-              <input className='w-12 mr-2 bg-black text-white rounded-lg' type='number' onChange={handleChangeBPM} value={displayBpm} />
-              <button className='bg-stone-300 text-black pl-4 pr-4' onClick={handleSetBpm}>update bpm</button>
+              <label className='text-black rounded-lg text-lg font-black'>bpm:&nbsp;</label>
+              <input className='w-12 mr-2 bg-black text-[ivory] rounded-lg' type='number' onChange={handleChangeBPM} value={displayBpm} />
+              <button className='bg-[ivory] text-black pl-4 pr-4' onClick={handleSetBpm}>update bpm</button>
             </div>
           </div>
+          { renderTracks && currentProject.tracks.length ?
           <div className='track-container'>
-            <div className='wood-background'>
-              { renderTracks ?
+            <div className='wood-background ring-8 ring-amber-950 shadow-xl shadow-black rounded-[1vmin]'>
+              
                 <>
                   {currentProject.tracks.map((track, idx) =>
                     <Track 
@@ -278,14 +283,15 @@ function updateSample(category, title, trackId) {
                       updateSample={updateSample}
                   />)}
                 </>
-                :
-                <>
-                </>
-              }
+                </div>
           </div>
-          </div>
+          :
+          <>
+          </>
+          }
+         
           <div className='flex items-center justify-center'>
-            <button className='bg-amber-700 pl-4 pr-4 mt-4 mb-4' onClick={handleAddTrack}>new track (save)</button>
+            <button className='bg-amber-700 pl-4 pr-4 mt-6 mb-4' onClick={handleAddTrack}>new track (save)</button>
           </div>
         </>
       :

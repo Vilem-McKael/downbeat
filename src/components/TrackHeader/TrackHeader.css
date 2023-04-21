@@ -6,9 +6,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: ivory;
     border: .3vmin;
     border-style: solid;
     border-color: rgb(12, 6, 2);
-    background: url('../../assets/images/darkwoodtexture.jpeg');
+    background: url('../../assets/images/darkwood.jpeg');
     background-size: cover;
 }
