@@ -25,7 +25,7 @@ export default function Track({track, index, bpm, isPlaying, passedSample, sampl
                 } else {
                     // stop();
                 }
-            }, Math.floor(59000 / bpm));
+            }, Math.floor(29500 / bpm));
         } else {
             clearInterval(playback);
             setTrackIndex(0);

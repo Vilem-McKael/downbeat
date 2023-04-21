@@ -21,21 +21,19 @@ export default function LoginForm( { setUser } ) {
             const user = await usersService.login(credentials);
             setUser(user);
         } catch {
-            setError('Log In Failed - Try Again');
+            setError('log in failed - try again');
         }
     }
-
-    
 
     return (
         <div>
             <div className="login-form-container">
                 <form className='flex flex-col items-center' autoComplete="off" onSubmit={handleSubmit}>
-                    <label>Email: </label>&nbsp;&nbsp;
-                    <input type="email" name="email" value={credentials.email} onChange={handleChange} required /><br/><br/>
-                    <label>Password: </label>&nbsp;&nbsp;
-                    <input type="password" name="password" value={credentials.password} onChange={handleChange} required /><br/><br/>
-                    <button type="submit">LOG IN</button>
+                    <label>email: </label>&nbsp;&nbsp;
+                    <input type="email" name="email" value={credentials.email} onChange={handleChange} required /><br/>
+                    <label>password: </label>&nbsp;&nbsp;
+                    <input type="password" name="password" value={credentials.password} onChange={handleChange} required /><br/>
+                    <button className='pl-4 pr-4' type="submit">log in</button>
                 </form>
             </div>
             <p className="error-message">&nbsp;{error}</p>

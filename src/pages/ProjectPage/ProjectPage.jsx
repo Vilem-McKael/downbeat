@@ -40,11 +40,11 @@ const sampleObj = {
     'clap2': clap2,
     'clap3': clap3
   },
-    'openhats': {
+  'openhats': {
     'openhat1': openhat1,
     'openhat2': openhat2
   },
-    'toms': {
+  'toms': {
     'tom1': tom1,
     'tom2': tom2
   }
@@ -136,6 +136,7 @@ export default function ProjectPage() {
           setTrackSamples(retrievedSamples);
           setSampleNames(retrievedNames);
           setRenderTracks(true);
+          console.log(retrievedNames);
       }
     }
     getAllTrackSamples();
@@ -259,7 +260,7 @@ function updateSample(category, title, trackId) {
               <button className='bg-black pl-4 pr-4 mr-2'onClick={handleDeleteProject}>delete project</button>
             </div>
             <div>
-              <label className='text-black rounded-lg text-lg font-black'>bpm:&nbsp;</label>
+              <label className='text-black rounded-lg text-lg font-black'>bpm (x2):&nbsp;</label>
               <input className='w-12 mr-2 bg-black text-[ivory] rounded-lg' type='number' onChange={handleChangeBPM} value={displayBpm} />
               <button className='bg-[ivory] text-black pl-4 pr-4' onClick={handleSetBpm}>update bpm</button>
             </div>
