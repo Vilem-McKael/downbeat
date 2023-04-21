@@ -1,3 +1,12 @@
+<img 
+    style="display: block; 
+           margin-left: auto;
+           margin-right: auto;
+           width: 30%;"
+    src="https://i.imgur.com/7ms6ELH.png" 
+    alt="downbeat logo">
+</img>
+
 # downbeat
 
 ## React-based drum machine
