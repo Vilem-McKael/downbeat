@@ -30,6 +30,7 @@
 
 # Screenshots
 
+<div align='center'>
 ![Landing page](https://i.imgur.com/DQXLHMB.png)
 Logo
 
@@ -38,6 +39,8 @@ Load Previous Beats
 
 *Demo*
 ![Demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTRiM2VlZTk3MzJlYWQ5ZTc1M2FiMDlmNGRjNDFlZDNiNzdjMmUzNCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/Bif7EQPLd8mrwI1CS8/giphy.gif)
+    
+</div>
 
 # Technologies Used
 
