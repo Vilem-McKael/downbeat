@@ -143,14 +143,18 @@ export default function ProjectPage() {
 
   async function handleAddTrack() {
     stopPlayback();
-    await handleSaveProject();
-    setRenderTracks(false);
-    const trackDetails = {
-      sample: 'snares_snare1',
-      contents: [0, 0, 0, 0, 0, 0, 0, 0],
+    if (currentProject.tracks.length < 10) {
+      await handleSaveProject();
+      setRenderTracks(false);
+      const trackDetails = {
+        sample: 'snares_snare1',
+        contents: [0, 0, 0, 0, 0, 0, 0, 0],
+      }
+      const projectWithNewTrack = await projectsAPI.addTrack(id, trackDetails)
+      setCurrentProject(projectWithNewTrack);
+    } else {
+      alert('you have reached the track limit for this project.')
     }
-    const projectWithNewTrack = await projectsAPI.addTrack(id, trackDetails)
-    setCurrentProject(projectWithNewTrack);
   }
 
 function stopPlayback() {
