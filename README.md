@@ -1,12 +1,11 @@
 <div align='center'>
 
-<img style="width: 40%;" src="https://i.imgur.com/7ms6ELH.png" alt="downbeat logo"/>
+<img style="width: 40%;" src="https://i.imgur.com/7ms6ELH.png" alt="downbeat logo"/><img>
 
 <br/>
     
 # downbeat: a React-based drum machine
 
-</div>
 
 ### downbeat is a compact DAW (Digital Audio Workstation) that allows you to quickly create beats using a handful of provided drum samples. The interface is intentially minimal and easy to use: simply add a track, pick a sample, click some nodes, and press play.
 
@@ -30,17 +29,18 @@
 
 # Screenshots
 
-<div align='center'>
+
+    
 ![Landing page](https://i.imgur.com/DQXLHMB.png)
 Logo
 
 ![Show post page](https://i.imgur.com/LBpI8be.png)
 Load Previous Beats
 
-*Demo*
 ![Demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTRiM2VlZTk3MzJlYWQ5ZTc1M2FiMDlmNGRjNDFlZDNiNzdjMmUzNCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/Bif7EQPLd8mrwI1CS8/giphy.gif)
+<br/>
     
-</div>
+
 
 # Technologies Used
 
@@ -72,3 +72,4 @@ Load Previous Beats
 - Set tracks to start at certain indicies
 - Volume controls for each track
 
+</div>
