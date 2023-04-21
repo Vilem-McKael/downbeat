@@ -1,8 +1,7 @@
 <div align='center'>
 
-<img style="width: 40%;" src="https://i.imgur.com/7ms6ELH.png" alt="downbeat logo"/><img>
-
-<br/>
+<img style="width: 40%;" src="https://i.imgur.com/7ms6ELH.png" alt="downbeat logo"/><img>  
+    
     
 # downbeat: a React-based drum machine
 
@@ -14,6 +13,7 @@
 # Getting Started
 
 [Make your first beat with 'downbeat'](https://downbeat-daw.herokuapp.com)
+
 
 #### In order to access full functionality, users must make a 'downbeat' account. Any credentials will do. This is simply so that you can come back and access your saved projects in the future.
 
@@ -32,13 +32,14 @@
 
     
 ![Landing page](https://i.imgur.com/DQXLHMB.png)
-Logo
+### downbeat Logo
 
 ![Show post page](https://i.imgur.com/LBpI8be.png)
-Load Previous Beats
+### Load Previous Beats page
 
-![Demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTRiM2VlZTk3MzJlYWQ5ZTc1M2FiMDlmNGRjNDFlZDNiNzdjMmUzNCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/Bif7EQPLd8mrwI1CS8/giphy.gif)
-<br/>
+![Demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTRiM2VlZTk3MzJlYWQ5ZTc1M2FiMDlmNGRjNDFlZDNiNzdjMmUzNCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/Bif7EQPLd8mrwI1CS8/giphy.gif)  
+    
+### Demo
     
 
 
@@ -62,6 +63,13 @@ Load Previous Beats
 [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com)
 [![Visual Studio](https://badgen.net/badge/icon/visualstudio?icon=visualstudio&label)](https://visualstudio.microsoft.com)
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
+    
+    
+[Trello link, featuring planned features](https://downbeat-daw.herokuapp.com](https://trello.com/b/xZ8EM7is/downbeat)
+
+[Wireframe made before building](https://whimsical.com/wireframe-Jsrrqk3Eed3EBxGG2tdtSw)
+
+[Entity-relationship Diagram (database functionality)](https://whimsical.com/erd-XfBhETqBxo3JL5xDQJdrBM)
 
 ## Icebox Features
 
