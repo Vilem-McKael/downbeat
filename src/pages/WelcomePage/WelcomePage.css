@@ -1,7 +1,12 @@
 .welcome-text {
-    font-size: 3vmin;
+    font-size: 5vmin;
+    letter-spacing: .5vmin;
     text-align: center;
-    margin: 0 10vmin 0 10vmin;
+    margin: 0 20vmin 0 20vmin;
     font-style: italic;
-    line-height: 4vmin;
+    line-height: 5vmin;
+    width: 100vw;
+    height: 55vh;
+    align-self: center;
+    padding: 2vmin;
 }

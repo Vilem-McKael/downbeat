@@ -23,7 +23,7 @@ export default function Track({track, index, bpm, isPlaying, passedSample, sampl
                 if (isPlaying && trackInputs[trackIndex]) {
                     playSound();
                 } else {
-                    stop();
+                    // stop();
                 }
             }, Math.floor(59000 / bpm));
         } else {

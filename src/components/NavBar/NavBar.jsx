@@ -12,8 +12,8 @@ export default function NavBar( {user, updateUser} ) {
 
 
   return (
-    <nav className='navbar flex bg-amber-700 items-center justify-evenly text-xl h-[10vh] pt-1'>
-        <Link to='/'><img className='w-24' src='https://i.imgur.com/5jtUS3f.png' /></Link>
+    <nav className='navbar flex bg-amber-700 items-center justify-evenly text-xl h-[10vh] pt-1 border-slate-900 border-y-[.5vmin]'>
+        <Link to='/'><img className='w-24' src='https://i.imgur.com/IYJdzkF.png' /></Link>
         |
         <Link to="/projects/new">create new</Link>
         |

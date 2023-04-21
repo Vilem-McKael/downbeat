@@ -9,8 +9,6 @@ import './App.css'
 
 // Components
 import ProjectPage from '../ProjectPage/ProjectPage'
-import SignUpForm from '../../components/SignUpForm/SignUpForm'
-import LoginForm from '../../components/LoginForm/LoginForm'
 import AuthPage from '../AuthPage/AuthPage'
 import NavBar from '../../components/NavBar/NavBar';
 import LoadProjectPage from '../LoadProjectPage/LoadProjectPage';
@@ -26,8 +24,6 @@ function App() {
     setUser(userState);
   }
 
-  
-
   return (
     <main className="App font-cabin">
       { user ?
@@ -38,13 +34,11 @@ function App() {
           <Route path='/*' element={<WelcomePage />} />
           <Route path='/projects/new' element={<NewProjectPage />} />
           <Route path='/projects/load' element={<LoadProjectPage />} />
-
         </Routes>
       </>
       :
       <AuthPage updateUser={updateUser} />
       }
-      {/* <ProjectPage /> */}
     </main>
   )
 }

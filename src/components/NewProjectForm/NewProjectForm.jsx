@@ -41,18 +41,18 @@ export default function NewProjectForm( {} ) {
     
 
   return (
-    
         <div>
             <div className='new-project-container'>
-                <form autoComplete="off" onSubmit={handleSubmit}>
-                    <label className='text-xl'>project title: </label><br/><br/>
-                    <input className='bg-black text-white text-xl rounded-lg pl-2 pt-2 pb-2 w-4/5' type="text" name="title" value={newProjectDetails.title} onChange={handleChange} maxLength={40} required /><br/><br/>
-                    <button className='text-black bg-black text-white pr-4 pl-4 text-xl inline-block' type='submit'>create project</button>
+                <form className='flex flex-col' autoComplete="off" onSubmit={handleSubmit}>
+                    <div className='flex justify-center'>
+                        <input className='bg-black text-[ivory] text-[3vmin] rounded-lg pl-2 pt-2 pb-2 mb-8 w-4/5 text-center' type="text" name="title" value={newProjectDetails.title} onChange={handleChange} maxLength={40} placeholder='project title' required />
+                    </div>
+                    <div className='flex justify-center'>
+                        <button className='text-center text-[ivory] bg-black text-[ivory] text-[4vmin] inline-block w-3/5 mb-4' type='submit'>create project</button>
+                    </div>
                 </form>
             </div>
             <p className="error-message">&nbsp;{newProjectDetails.error}</p>
         </div>
-
     )
-
 }
