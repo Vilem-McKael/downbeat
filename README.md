@@ -1,15 +1,12 @@
-<img 
-    style="display: block; 
-           margin-left: auto;
-           margin-right: auto;
-           width: 30%;"
-    src="https://i.imgur.com/7ms6ELH.png" 
-    alt="downbeat logo">
-</img>
+<div align='center'>
 
-# downbeat
+<img style="width: 40%;" src="https://i.imgur.com/7ms6ELH.png" alt="downbeat logo"/>
 
-## React-based drum machine
+<br/>
+    
+# downbeat: a React-based drum machine
+
+</div>
 
 ### downbeat is a compact DAW (Digital Audio Workstation) that allows you to quickly create beats using a handful of provided drum samples. The interface is intentially minimal and easy to use: simply add a track, pick a sample, click some nodes, and press play.
 
