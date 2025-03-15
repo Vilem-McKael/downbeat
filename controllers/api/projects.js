@@ -26,8 +26,6 @@ async function createProject(req, res) {
 
 async function getAll(req, res) {
     try {
-        // https://stackoverflow.com/questions/24501756/sort-mongodb-documents-by-timestamp-in-desc-order
-        const sortParam = {'timestamp': -1};
         const projects = await Project.find({user: req.user._id});
         const sortedProjects = projects.reverse();
         res.json(sortedProjects);
