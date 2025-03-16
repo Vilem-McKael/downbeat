@@ -8,6 +8,12 @@ require('./config/database');
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, "dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 // middleware
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,7 +34,7 @@ app.get('/*', function (req, res) {
 })
 
 // listener
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.listen(port, function () {
     console.log(`Express app running on port ${port}`)
