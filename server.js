@@ -28,7 +28,7 @@ app.get('/*', function (req, res) {
 })
 
 // listener
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.listen(port, function () {
     console.log(`Express app running on port ${port}`)
